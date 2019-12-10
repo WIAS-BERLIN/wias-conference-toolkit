@@ -112,8 +112,8 @@ rejection_paper = [30754]
 rejected_author = [158829]
 
 
-authors_dup = {"Bo|Jiang": (("jiangbo@njnu.edu.cn", 141431),
-                             ("isyebojiang@163.com", 158323))}
+authors_dup = {"Erika|Mustermann": (("erika@mustermann.de", 141431),
+                             ("erikamustermann@testemaildomain.com", 158323))}
 
 cancel_str = "canceled! "
 
@@ -408,10 +408,10 @@ def get_authorid(authors_dbs, firstname, name, institution, authors=None, email=
     return a_id
 
 contrib_author_exceptions = {
-        29022: {'Bo|Jiang': 158323},
-        29023: {'Bo|Jiang': 158323},
+        29022: {'Erika|Mustermann': 158323},
+        29023: {'Erika|Mustermann': 158323},
 
-        25901: {'Bo|Jiang': 141431},
+        25901: {'Erika|Mustermann': 141431},
 }
 
 def contrib_authors(c, authors_db, authors_db_search, c_title, c_id,
