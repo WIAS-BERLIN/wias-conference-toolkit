@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<iccopt2019>
+  <clusters>
+    <cluster>
+      <ID>1</ID>
+      <title>Central Events</title>
+      <abstract></abstract>
+      <color>#888888</color>
+      <shortcut>C</shortcut>
+    </cluster>
+    <cluster>
+      <ID>2</ID>
+      <title>Topic one</title>
+      <abstract></abstract>
+      <chair>9</chair>
+      <chair>10</chair>
+      <color>#624300</color>
+      <shortcut>ONE</shortcut>
+    </cluster>
+    <cluster>
+      <ID>3</ID>
+      <title>Topic two</title>
+      <abstract></abstract>
+      <chair>11</chair>
+      <color>#ff1e1e</color>
+      <shortcut>TWO</shortcut>
+    </cluster>
+  </clusters>
+</iccopt2019>

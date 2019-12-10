@@ -1,0 +1,30 @@
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+
+# emacs buffers
+*.*~
+
+# python
+*.pyc
+__pycache__/
+
+*.xlsx
+
+# own files
+converia-input/tex-files/2019-11-*
+converia-input/tex-files/2019-12-*
+converia-input/tex-files/2019-04-*
+converia-input/pdf-files/*
+converia-input/info-files/*
+xml/rosetta-proposed.csv
+
+*.synctex.gz
+*.pdf
+*.sch
+*.nfs*

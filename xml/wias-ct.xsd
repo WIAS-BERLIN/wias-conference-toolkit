@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="stringtype">
+  <xs:restriction base="xs:string"/>
+</xs:simpleType>
+
+<xs:simpleType name="paperid">
+ <xs:restriction base="xs:integer">
+   <xs:minInclusive value="0"/>                   <!--  TODO: tune this -->
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="authorid">
+ <xs:restriction base="xs:integer">
+  <xs:minInclusive value="0"/>                   <!-- TODO: tune this -->
+ </xs:restriction>
+</xs:simpleType>
+
+<!-- 
+ -5: Do not come (for persons with a role)
+ -4: Free registration, still need to pay something
+ -3: Free registration, not validated
+ -2: Registered, but no paiment
+ -1: No registration (and no paiment)
+ 0-7: Registration
+  8: Free registration
+-->
+<xs:simpleType name="paimentstatus">
+  <xs:restriction base="xs:integer">
+    <xs:minInclusive value="-5"/>                   <!-- TODO: tune this -->
+    <xs:maxInclusive value="8"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<!--
+  -2: on waiting list, needs to pay
+  -1: on waiting list
+   0: has dinner, needs to pay
+   1: has dinner
+   2: has 2 dinners
+   3: free dinner
+-->
+<xs:simpleType name="dinnerstatus">
+ <xs:restriction base="xs:integer">
+  <xs:minInclusive value="-2"/>
+  <xs:maxInclusive value="3"/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="onlyone">
+ <xs:restriction base="xs:integer">
+  <xs:minInclusive value="1"/>
+  <xs:maxInclusive value="1"/>
+ </xs:restriction>
+</xs:simpleType>
+
+<!--
+  -1: free registration, no check
+  0: going to summer school, did not pay
+  1: paid or free
+  2: hand-registered via email
+  3: late registration
+-->
+<xs:simpleType name="summerschoolstatus">
+ <xs:restriction base="xs:integer">
+  <xs:minInclusive value="-1"/>
+  <xs:maxInclusive value="3"/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="sessionid">
+  <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0"/>                   <!-- TODO: tune this -->
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="clusterid">
+  <xs:restriction base="xs:integer">
+      <xs:minInclusive value="-1"/>
+      <xs:maxInclusive value="16"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="sessionordertype">
+  <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+       <!--      <xs:maxInclusive value="6"/> TODO uncomment when the schedule is done -->
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="contributiontype">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="contributed_talk"/>
+    <xs:enumeration value="invited_talk"/>
+    <xs:enumeration value="poster"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="roletype">
+ <xs:restriction base="xs:string">
+  <xs:enumeration value="Grant"/>
+  <xs:enumeration value="Plenary speaker"/>
+  <xs:enumeration value="Semiplenary speaker"/>
+  <xs:enumeration value="Program Committee"/>
+  <xs:enumeration value="Local Organizer"/>
+  <xs:enumeration value="Best Paper Committee"/>
+  <xs:enumeration value="Summer School lecturer"/>
+  <xs:enumeration value="Cluster chair"/>
+  <xs:enumeration value="Best Paper Finalist"/>
+  <xs:enumeration value="Student Helper"/>
+  <xs:enumeration value="Local Helper"/>
+  <xs:enumeration value="Last Minute"/>
+ </xs:restriction>
+</xs:simpleType>
+
+
+<!-- TODO complete -->
+<xs:complexType name="scheduletype">
+ <xs:sequence>
+  <xs:element name="day">
+   <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="Mon|Tue|Wed|Thu"/>
+     </xs:restriction>
+   </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="slot" type="xs:string"/>
+
+  <!--
+  <xs:element name="number">
+   <xs:simpleType>
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="100"/>
+     </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  -->
+  <xs:element name="start" type="xs:string"/>
+  <xs:element name="end" type="xs:string"/>
+
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="paperorder">
+ <xs:sequence>
+  <xs:element name="paperid" type="paperid"/>
+
+  <xs:element name="idx">
+   <xs:simpleType>
+    <xs:restriction base="xs:integer">
+     <xs:minInclusive value="1"/>
+     <xs:maxInclusive value="6"/>
+    </xs:restriction>
+   </xs:simpleType>
+  </xs:element>
+
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="roomtype">
+ <xs:sequence>
+  <xs:element name="name">
+   <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <!--      <xs:pattern value="Mon|Tue|Wed|Thu"/>    TODO: find the authorized value-->
+     </xs:restriction>
+   </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="seats" type="xs:integer"/>
+ </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="meetingtype">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="COAP"/>
+    <xs:enumeration value="SIOPT"/>
+    <xs:enumeration value="OMS"/>
+    <xs:enumeration value="JNSA"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="addresstype">
+ <xs:sequence>
+  <xs:element name="institution" type="stringtype"/>
+  <xs:element name="street" type="stringtype"/>
+  <xs:element name="zipcode" type="stringtype"/>    <!-- zipcode is not a number for some countries -->
+  <xs:element name="city" type="stringtype"/>
+  <xs:element name="state" type="stringtype"/>
+  <xs:element name="country" type="stringtype"/>
+  <xs:element name="countrycode" type="stringtype"/>
+ </xs:sequence>
+</xs:complexType>
+
+
+<xs:complexType name="person">                    <!-- complex datatype uniType -->
+ <xs:sequence>
+  <xs:element name="ID" type="authorid"/>
+  <xs:element name="title" type="stringtype"/>
+  <xs:element name="first_name" type="stringtype"/>
+  <xs:element name="last_name" type="stringtype"/>
+  <xs:element name="email" type="stringtype"/>
+  <xs:element name="address" type="addresstype"/>
+  <xs:element name="paiment_status" type="paimentstatus"/>
+  <xs:element name="dinner" type="dinnerstatus" minOccurs="0" maxOccurs="unbounded"/> <!-- Some may have more than 1 dinner, like Tröltzsch -->
+  <xs:element name="summer_school" type="summerschoolstatus" minOccurs="0"/>
+  <xs:element name="contribution_presenter" type="paperid" minOccurs="0" maxOccurs="unbounded"/> <!-- TODO -->
+  <xs:element name="contribution_author" type="paperid" minOccurs="0" maxOccurs="unbounded"/>
+  <xs:element name="role" type="roletype" minOccurs="0" maxOccurs="unbounded"/>
+  <xs:element name="amount_paid" type="xs:float" minOccurs="0"/>
+  <xs:element name="book_of_abstract" type="onlyone" minOccurs="0"/>
+  <xs:element name="meeting" type="meetingtype" minOccurs="0" maxOccurs="unbounded"/>
+  <xs:element name="canceled" type="stringtype" minOccurs="0"/>
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="paper">                     <!-- contribution -->
+ <xs:sequence>
+  <xs:element name="ID" type="paperid"/>
+  <xs:element name="title" type="stringtype"/>
+  <xs:element name="abstract" type="stringtype"/>
+  <xs:element name="author" type="authorid" maxOccurs="unbounded"/>
+  <xs:element name="presenter" type="authorid"/>
+  <xs:element name="session" type="sessionid" minOccurs="0"/>       <!-- remove minOccurs once scheduling is done -->
+  <xs:element name="order" type="sessionordertype" minOccurs="0"/>       <!-- remove minOccurs once scheduling is done -->
+  <xs:element name="type" type="contributiontype"/>
+  <xs:element name="canceled" type="stringtype" minOccurs="0"/>
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cluster">
+ <xs:sequence>
+  <xs:element name="ID" type="clusterid"/>
+  <xs:element name="title" type="stringtype"/>
+  <xs:element name="color" type="stringtype"/>
+  <xs:element name="shortcut" type="stringtype"/>
+  <xs:element name="abstract" type="stringtype" minOccurs="0"/>                   <!-- TODO remove when clusters are well formed -->
+  <xs:element name="chairs" type="authorid" minOccurs="0" maxOccurs="unbounded"/> <!-- TODO remove when clusters are well formed -->
+ </xs:sequence>
+</xs:complexType>
+
+
+
+<xs:complexType name="session">
+ <xs:sequence>
+   <xs:element name="ID" type="sessionid"/>
+   <xs:element name="cluster" type="clusterid"/>
+   <xs:element name="title" type="stringtype"/>
+    <xs:element name="abstract" type="stringtype" minOccurs="0"/> <!-- TODO: not sure if minOccurs should be 1 -->
+   <xs:element name="paper" type="paperid" minOccurs="0" maxOccurs="unbounded"/>  <!-- change maxOccurs to 6 once scheduling is done -->
+   <xs:element name="organiser" type="authorid" minOccurs="0" maxOccurs="unbounded"/>     <!-- need to implement a check here? -->
+ </xs:sequence>
+</xs:complexType>
+
+
+<xs:complexType name="schedule_session">
+ <xs:sequence>
+   <xs:element name="ID" type="sessionid"/>
+   <xs:element name="title" type="stringtype"/>
+   <xs:element name="paper" type="paperorder" minOccurs="0" maxOccurs="unbounded"/>  <!-- TODO remove minOccurs, change maxOccurs to 6 once scheduling is done -->
+   <xs:element name="chair" type="authorid" minOccurs="0" maxOccurs="unbounded"/>    <!-- TODO remove minOccurs -->
+   <xs:element name="timeslot" type="scheduletype" minOccurs="0" maxOccurs="unbounded"/>  <!-- TODO remove minOccurs once scheduling is done -->
+   <xs:element name="room" type="xs:string"/>  <!-- TODO impose restriction later" -->
+   <xs:element name="session" type="sessionid" minOccurs="0" maxOccurs="unbounded"/> <!-- TODO remove minOccurs -->
+   <xs:element name="cluster" type="clusterid" minOccurs="0"/>                      <!-- TODO remove minOccurs -->
+ </xs:sequence>
+</xs:complexType>
+
+
+<xs:element name="iccopt2019">
+ <xs:complexType>
+  <xs:all>
+   <xs:element name="participants">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="person" type="person" maxOccurs="unbounded"/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+   <xs:element name="talks">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="talk" type="paper" maxOccurs="unbounded"/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+   <xs:element name="posters">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="poster" type="paper" maxOccurs="unbounded"/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+   <xs:element name="schedule_sessions">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="schedule_session" type="schedule_session" maxOccurs="unbounded"/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+   <xs:element name="sessions">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="session" type="session" maxOccurs="unbounded"/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+   <xs:element name="clusters">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="cluster" type="cluster" maxOccurs="unbounded"/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+  </xs:all>
+ </xs:complexType>
+
+
+ <xs:unique name="aid_unique">
+  <xs:selector xpath="participants/person" />
+  <xs:field xpath="id"/>
+ </xs:unique>
+
+ <!--
+ <xs:unique name="email_unique">
+  <xs:selector xpath="participants/person" />
+  <xs:field xpath="email"/>
+ </xs:unique>
+ -->
+
+ <xs:unique name="sid_unique">
+  <xs:selector xpath="sessions/session" />
+  <xs:field xpath="id"/>
+ </xs:unique>
+
+ <xs:unique name="tid_unique">
+  <xs:selector xpath="talks/talk" />
+  <xs:field xpath="id"/>
+ </xs:unique>
+
+ <xs:unique name="ssid_unique">
+  <xs:selector xpath="schedule_sessions/schedule_session" />
+  <xs:field xpath="id"/>
+ </xs:unique>
+
+</xs:element>
+
+
+</xs:schema>

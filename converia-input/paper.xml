@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<converia_papers>
+
+	<paper id="10011">
+		<paper_title>Talk 1 1</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Kristine</person_firstname>
+		<person_lastname>Orfeo</person_lastname>
+		<abstract_id>10000</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>orfeo@testemaildomain.com</address_email>
+		<address_company>Annis University</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NO</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id>10000</paper_paper_id>
+		<paper_order_index>1.00</paper_order_index>
+		<person_title>Dr.</person_title>
+		<address_street>Miraystreet 12</address_street>
+		<address_postcode>12345</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>REJ</effect>
+		<topiclist>
+			<topic>
+				<name>Topic one</name>
+				<short_name>one</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic One Reviewerone</name>
+</reviewer>
+			<reviewer>
+				<name>Topic One Reviewertwo</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas ligula a condimentum euismod. Sed bibendum, massa non pharetra molestie, tortor nunc finibus mi, in imperdiet neque dolor a tortor. Sed in erat nisl. Pellentesque facilisis cursus orci, et feugiat urna molestie nec. Nam ut suscipit enim. Sed sodales velit vel justo pretium interdum. Nunc urna ipsum, semper vel imperdiet sit amet, hendrerit quis nisi. Ut id efficitur nulla.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Dr.</title>
+				<prename>Kristine</prename>
+				<name>Orfeo</name>
+				<institution></institution>
+				<department></department>
+				<address>Miraystreet 12
+12345 Berlin
+DE</address>
+				<address_structured>
+					<street>Miraystreet 12</street>
+					<postcode>12345</postcode>
+					<town>Berlin</town>
+					<country>DE</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+</authors>
+</paper>
+
+<paper id="10022">
+		<paper_title>Talk 1 2</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Božo</person_firstname>
+		<person_lastname> Bhavna</person_lastname>
+		<abstract_id>10002</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>bhavna@testemaildomain.com</address_email>
+		<address_company>Gulumbu University</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NO</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id>10000</paper_paper_id>
+		<paper_order_index>2.00</paper_order_index>
+		<person_title>Dr.</person_title>
+		<address_street>Whatstreet 12</address_street>
+		<address_postcode>12345</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>REJ</effect>
+		<topiclist>
+			<topic>
+				<name>Topic one</name>
+				<short_name>one</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic One Reviewerone</name>
+</reviewer>
+			<reviewer>
+				<name>Topic One Reviewerone</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>t.b.a.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Dr.</title>
+				<prename>Božo</prename>
+				<name>Orfeo</name>
+				<institution></institution>
+				<department></department>
+				<address>Whatstreet 12
+12345 Berlin
+DE</address>
+				<address_structured>
+					<street>Wahtstreet 12</street>
+					<postcode>12345</postcode>
+					<town>Berlin</town>
+					<country>DE</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+</authors>
+</paper>
+
+<paper id="10033">
+		<paper_title>Talk 1 3</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Francesco</person_firstname>
+		<person_lastname>Klára</person_lastname>
+		<abstract_id>10003</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>klara@testemaildomain.com</address_email>
+		<address_company>Klaras University</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NO</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id>10000</paper_paper_id>
+		<paper_order_index>3.00</paper_order_index>
+		<person_title>Dr.</person_title>
+		<address_street>Whatstreet 12</address_street>
+		<address_postcode>12345</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>REJ</effect>
+		<topiclist>
+			<topic>
+				<name>Topic one</name>
+				<short_name>one</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic One Reviewerone</name>
+</reviewer>
+			<reviewer>
+				<name>Topic One Reviewerone</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas ligula a condimentum euismod. Sed bibendum, massa non pharetra molestie, tortor nunc finibus mi, in imperdiet neque dolor a tortor. Sed in erat nisl. Pellentesque facilisis cursus orci, et feugiat urna molestie nec. Nam ut suscipit enim. Sed sodales velit vel justo pretium interdum. Nunc urna ipsum, semper vel imperdiet sit amet, hendrerit quis nisi. Ut id efficitur nulla.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Dr.</title>
+				<prename>Francesco</prename>
+				<name>Klára</name>
+				<institution>Klaras University</institution>
+				<department></department>
+				<address>Whatstreet 12
+12345 Berlin
+DE</address>
+				<address_structured>
+					<street>Wahtstreet 12</street>
+					<postcode>12345</postcode>
+					<town>Berlin</town>
+					<country>DE</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+</authors>
+</paper>
+
+	<paper id="10000">
+		<paper_title>Session 1</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Josefina</person_firstname>
+		<person_lastname>Yaron</person_lastname>
+		<abstract_id>11000</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>yaron@wias-berlin.de</address_email>
+		<address_company>Dubravko Institute</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>SESSION</paper_type>
+		<paper_paper_id>0</paper_paper_id>
+		<paper_order_index>0.00</paper_order_index>
+		<person_title>Dr.</person_title>
+		<address_street>Zenobiosstr. 39</address_street>
+		<address_postcode>10000</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>ACC</effect>
+		<topiclist>
+			<topic>
+				<name>Topic one</name>
+				<short_name>one</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic One Reviewerone</name>
+</reviewer>
+			<reviewer>
+				<name>Topic One Reviewerone</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a leo at augue laoreet varius id ut mauris. Integer lobortis, purus eu sollicitudin molestie, purus metus suscipit magna, et dapibus libero augue a augue. Curabitur urna neque, efficitur sed tortor a, lobortis eleifend sem. Vivamus molestie finibus dictum. Nullam scelerisque facilisis leo, at blandit velit. Etiam risus enim, dignissim nec metus at, porttitor condimentum sem. Quisque egestas, erat ac consequat placerat, sem lectus ornare ex, nec ultricies mi justo ut leo. Vivamus vitae leo sit amet mauris gravida efficitur. Phasellus congue felis nulla. Donec odio risus, luctus at orci nec, dictum elementum mi.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Dr.</title>
+				<prename>Josefina</prename>
+				<name>Yaron</name>
+				<institution></institution>
+				<department></department>
+				<address>Zenobiosstr. 39
+10000 Berlin
+DE</address>
+				<address_structured>
+					<street>Zenobiostr. 39 ·</street>
+					<postcode>10000</postcode>
+					<town>Berlin</town>
+					<country>DE</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+			<author>
+				<title>Prof.</title>
+				<prename>Gonçalo</prename>
+				<name>Morgan</name>
+				<institution>Dubravko Institute</institution>
+				<department></department>
+				<address>Chopinstrasse 39
+12345 Frankfurt
+DE</address>
+				<address_structured>
+					<street>Chopinstrasse 39</street>
+					<postcode>12345</postcode>
+					<town>Frankfurt</town>
+					<country>DE</country>
+</address_structured>
+				<type>Author</type>
+</author>
+</authors>
+</paper>
+
+	<paper id="20011">
+		<paper_title>Talk 2 1</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Gonçalo</person_firstname>
+		<person_lastname>Morgan</person_lastname>
+		<abstract_id>20001</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>morgan@wias-berlin.de</address_email>
+		<address_company>Dubravko Institute</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id>20000</paper_paper_id>
+		<paper_order_index>1.00</paper_order_index>
+		<person_title>Prof.</person_title>
+		<address_street>Mohrenstrasse 39</address_street>
+		<address_postcode>10117</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>ACC</effect>
+		<topiclist>
+			<topic>
+				<name>Topic two</name>
+				<short_name>two</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic Two Reviewer</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue arcu, luctus id nisi in, rhoncus imperdiet metus. Proin quis consectetur nisl. Nunc blandit felis nibh, ullamcorper condimentum lacus eleifend ac. Vivamus dictum, magna vitae luctus dictum, ligula diam ultrices tellus, in vulputate ante dolor a odio. Cras eget neque tincidunt, malesuada mauris non, ultrices justo. Vivamus eu accumsan sapien, nec suscipit enim. Integer dapibus justo at ante luctus, vitae suscipit justo volutpat. Sed varius bibendum lacus ac eleifend. Ut luctus nec ex id tristique.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Prof.</title>
+				<prename>Gonçalo</prename>
+				<name>Morgan</name>
+				<institution>Dubravko Institute</institution>
+				<department></department>
+				<address>
+ 
+</address>
+				<address_structured>
+					<street></street>
+					<postcode></postcode>
+					<town></town>
+					<country></country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+</authors>
+</paper>
+
+	<paper id="20022">
+		<paper_title>Talk 2 2</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Simona</person_firstname>
+		<person_lastname>Aðalsteinn</person_lastname>
+		<abstract_id>20002</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>adalsteinn@wias-berlin.de</address_email>
+		<address_company>Weierstrass Institute for Applied Analysis and Stochastics</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id>20000</paper_paper_id>
+		<paper_order_index>1.00</paper_order_index>
+		<person_title>Prof.</person_title>
+		<address_street>Mohrenstrasse 39</address_street>
+		<address_postcode>10117</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>ACC</effect>
+		<topiclist>
+			<topic>
+				<name>Topic two</name>
+				<short_name>two</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic Two Reviewer</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue arcu, luctus id nisi in, rhoncus imperdiet metus. Proin quis consectetur nisl. Nunc blandit felis nibh, ullamcorper condimentum lacus eleifend ac. Vivamus dictum, magna vitae luctus dictum, ligula diam ultrices tellus, in vulputate ante dolor a odio. Cras eget neque tincidunt, malesuada mauris non, ultrices justo. Vivamus eu accumsan sapien, nec suscipit enim. Integer dapibus justo at ante luctus, vitae suscipit justo volutpat. Sed varius bibendum lacus ac eleifend. Ut luctus nec ex id tristique.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Prof.</title>
+				<prename>Simona</prename>
+				<name>Aðalsteinn</name>
+				<institution>Weierstrass Institute for Applied Analysis and Stochastics</institution>
+				<department></department>
+				<address>
+ 
+</address>
+				<address_structured>
+					<street></street>
+					<postcode></postcode>
+					<town></town>
+					<country></country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+			<author>
+				<title>Prof.</title>
+				<prename>Gonçalo</prename>
+				<name>Morgan</name>
+				<institution>Dubravko Institute</institution>
+				<department></department>
+				<address>
+ 
+</address>
+				<address_structured>
+					<street></street>
+					<postcode></postcode>
+					<town></town>
+					<country></country>
+</address_structured>
+				<type>Author</type>
+</author>
+</authors>
+</paper>
+
+
+	<paper id="20000">
+		<paper_title>Session 2</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Gonçalo</person_firstname>
+		<person_lastname>Morgan</person_lastname>
+		<abstract_id>22000</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>morgan@wias-berlin.de</address_email>
+		<address_company>Dubravko Institute</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>SESSION</paper_type>
+		<paper_paper_id>0</paper_paper_id>
+		<paper_order_index>0.00</paper_order_index>
+		<person_title>Dr.</person_title>
+		<address_street>Zenobiosstr. 39</address_street>
+		<address_postcode>10000</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>ACC</effect>
+		<topiclist>
+			<topic>
+				<name>Topic two</name>
+				<short_name>two</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic Two Reviewer</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a leo at augue laoreet varius id ut mauris. Integer lobortis, purus eu sollicitudin molestie, purus metus suscipit magna, et dapibus libero augue a augue. Curabitur urna neque, efficitur sed tortor a, lobortis eleifend sem. Vivamus molestie finibus dictum. Nullam scelerisque facilisis leo, at blandit velit. Etiam risus enim, dignissim nec metus at, porttitor condimentum sem. Quisque egestas, erat ac consequat placerat, sem lectus ornare ex, nec ultricies mi justo ut leo. Vivamus vitae leo sit amet mauris gravida efficitur. Phasellus congue felis nulla. Donec odio risus, luctus at orci nec, dictum elementum mi.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Dr.</title>
+				<prename>Josefina</prename>
+				<name>Yaron</name>
+				<institution></institution>
+				<department></department>
+				<address>Zenobiosstr. 39
+10000 Berlin
+DE</address>
+				<address_structured>
+					<street>Zenobiostr. 39 ·</street>
+					<postcode>10000</postcode>
+					<town>Berlin</town>
+					<country>DE</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+			<author>
+				<title>Prof.</title>
+				<prename>Gonçalo</prename>
+				<name>Morgan</name>
+				<institution>Dubravko Institute</institution>
+				<department></department>
+				<address>Chopinstrasse 39
+12345 Frankfurt
+DE</address>
+				<address_structured>
+					<street>Chopinstrasse 39</street>
+					<postcode>12345</postcode>
+					<town>Frankfurt</town>
+					<country>DE</country>
+</address_structured>
+				<type>Author</type>
+</author>
+</authors>
+</paper>
+
+	<paper id="30001">
+		<paper_title>Poster one</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Anna</person_firstname>
+		<person_lastname>Æthelred</person_lastname>
+		<abstract_id>30011</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>DE</address_country>
+		<address_email>aethelred@wias-berlin.de</address_email>
+		<address_company>Universität Berlin</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>604</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id></paper_paper_id>
+		<paper_order_index>1.00</paper_order_index>
+		<person_title></person_title>
+		<address_street>Mohrenstr. 39</address_street>
+		<address_postcode>10117</address_postcode>
+		<address_town>Berlin</address_town>
+		<bookings></bookings>
+		<effect>ACC</effect>
+		<topiclist>
+			<topic>
+				<name>Topic two</name>
+				<short_name>two</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+			<reviewer>
+				<name>Topic Two Reviewer</name>
+</reviewer>
+</reviewerlist>
+		<presentationform>Poster</presentationform>
+		<abstract_content>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc massa urna, condimentum at scelerisque sit amet, ornare eu mi. Sed vulputate blandit imperdiet. Praesent id ullamcorper ex, ac facilisis erat. Proin scelerisque metus eu est feugiat, nec tincidunt urna laoreet. Fusce est ex, aliquam vel pharetra ut, consequat sit amet mauris. Quisque pulvinar, sapien vel congue consequat, eros eros vestibulum nisi, ut pellentesque mi nunc vel libero. Ut sapien lorem, scelerisque ac blandit at, maximus ut est. Aenean ut fringilla ipsum, id imperdiet lectus. Mauris a mauris finibus, gravida enim at, dictum lacus. Pellentesque sed magna metus. Integer id tellus vel felis lobortis facilisis. Quisque et tincidunt ante, in congue tellus. Ut suscipit quam quis metus dictum vehicula. Aliquam ante diam, maximus id pharetra vitae, placerat sit amet metus. Nulla id urna tellus.</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title></title>
+				<prename>Anna</prename>
+				<name>Æthelred</name>
+				<institution>Universität Berlin</institution>
+				<department></department>
+				<address>Mohrenstr. 39
+10117 Berlin
+DE</address>
+				<address_structured>
+					<street>Mohrenstr. 39</street>
+					<postcode>10117</postcode>
+					<town>Berlin</town>
+					<country>DE</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+</authors>
+</paper>
+
+<paper id="30000">
+		<paper_title>Poster session</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname></person_firstname>
+		<person_lastname></person_lastname>
+		<abstract_id>33000</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country></address_country>
+		<address_email></address_email>
+		<address_company></address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>604</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>SESSION</paper_type>
+		<paper_paper_id>0</paper_paper_id>
+		<paper_order_index>0.00</paper_order_index>
+		<person_title></person_title>
+		<address_street></address_street>
+		<address_postcode></address_postcode>
+		<address_town></address_town>
+		<bookings></bookings>
+		<effect></effect>
+		<topiclist>
+			<topic>
+				<name>Central Events</name>
+				<short_name>Best</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+</reviewerlist>
+		<presentationform>Poster</presentationform>
+		<abstract_content>Due to limitation in the schedule software, dummy timeslots are assigned to each poster. Please disregard this information: all the poster are presented during the whole session duration (18:20 to 20:30)</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+</authors>
+</paper>
+
+	<paper id="33305">
+		<paper_title>Plenary Talk</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Plenary</person_firstname>
+		<person_lastname>Chair</person_lastname>
+		<abstract_id>49402</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>IL</address_country>
+		<address_email>plenarychair@testemaildomain.com</address_email>
+		<address_company>Tel-Aviv University</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance></paper_author_acceptance>
+		<paper_type>SESSION</paper_type>
+		<paper_paper_id>0</paper_paper_id>
+		<paper_order_index>0.00</paper_order_index>
+		<person_title>Prof.</person_title>
+		<address_street></address_street>
+		<address_postcode></address_postcode>
+		<address_town></address_town>
+		<bookings></bookings>
+		<effect></effect>
+		<topiclist>
+			<topic>
+				<name>Central Events</name>
+				<short_name>Best</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content></abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Prof.</title>
+				<prename>Plenary</prename>
+				<name>Chair</name>
+				<institution>Tel-Aviv University</institution>
+				<department></department>
+				<address>
+ 
+IL</address>
+				<address_structured>
+					<street></street>
+					<postcode></postcode>
+					<town></town>
+					<country>IL</country>
+</address_structured>
+				<type>Author</type>
+</author>
+</authors>
+</paper>
+
+	<paper id="33309">
+		<paper_title>Plenary talk title</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Plenary</person_firstname>
+		<person_lastname>Speaker</person_lastname>
+		<abstract_id>49407</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>IL</address_country>
+		<address_email>plenaryspeaker@testemaildomain.com</address_email>
+		<address_company>Tel Aviv University</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id>33305</paper_paper_id>
+		<paper_order_index>0.00</paper_order_index>
+		<person_title>Prof.</person_title>
+		<address_street></address_street>
+		<address_postcode></address_postcode>
+		<address_town></address_town>
+		<bookings></bookings>
+		<effect>ACC</effect>
+		<topiclist>
+			<topic>
+				<name>Central Events</name>
+				<short_name>Best</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Plenary talk abstract</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Prof.</title>
+				<prename>Plenary</prename>
+				<name>Speaker</name>
+				<institution>Tel Aviv University</institution>
+				<department></department>
+				<address>
+ 
+IL</address>
+				<address_structured>
+					<street></street>
+					<postcode></postcode>
+					<town></town>
+					<country>IL</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+</authors>
+</paper>
+
+	<paper id="33308">
+		<paper_title>Semiplenary Talk</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Semiplenary</person_firstname>
+		<person_lastname>Chair</person_lastname>
+		<abstract_id>49402</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>IL</address_country>
+		<address_email>semiplenarychair@testemaildomain.com</address_email>
+		<address_company>Tel-Aviv University</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance></paper_author_acceptance>
+		<paper_type>SESSION</paper_type>
+		<paper_paper_id>0</paper_paper_id>
+		<paper_order_index>0.00</paper_order_index>
+		<person_title>Prof.</person_title>
+		<address_street></address_street>
+		<address_postcode></address_postcode>
+		<address_town></address_town>
+		<bookings></bookings>
+		<effect></effect>
+		<topiclist>
+			<topic>
+				<name>Central Events</name>
+				<short_name>Best</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content></abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Prof.</title>
+				<prename>Semiplenary</prename>
+				<name>Chair</name>
+				<institution>Tel-Aviv University</institution>
+				<department></department>
+				<address>
+ 
+IL</address>
+				<address_structured>
+					<street></street>
+					<postcode></postcode>
+					<town></town>
+					<country>IL</country>
+</address_structured>
+				<type>Author</type>
+</author>
+</authors>
+</paper>
+
+	<paper id="33319">
+		<paper_title>Semiplenary talk title</paper_title>
+		<paper_file_id>0</paper_file_id>
+		<paper_description></paper_description>
+		<person_firstname>Semiplenary</person_firstname>
+		<person_lastname>Speaker</person_lastname>
+		<abstract_id>49407</abstract_id>
+		<manuscript_id>0</manuscript_id>
+		<address_country>IL</address_country>
+		<address_email>semiplenaryspeaker@testemaildomain.com</address_email>
+		<address_company>Tel Aviv University</address_company>
+		<address_department></address_department>
+		<paper_presentationform_id>602</paper_presentationform_id>
+		<paper_author_acceptance>NA</paper_author_acceptance>
+		<paper_type>PAPER</paper_type>
+		<paper_paper_id>33308</paper_paper_id>
+		<paper_order_index>0.00</paper_order_index>
+		<person_title>Prof.</person_title>
+		<address_street></address_street>
+		<address_postcode></address_postcode>
+		<address_town></address_town>
+		<bookings></bookings>
+		<effect>ACC</effect>
+		<topiclist>
+			<topic>
+				<name>Central Events</name>
+				<short_name>Best</short_name>
+				<description></description>
+</topic>
+</topiclist>
+		<reviewerlist>
+</reviewerlist>
+		<presentationform>Talk</presentationform>
+		<abstract_content>Semiplenary talk abstract</abstract_content>
+		<manuscript_content></manuscript_content>
+		<authors>
+			<author>
+				<title>Prof.</title>
+				<prename>Semiplenary</prename>
+				<name>Speaker</name>
+				<institution>Tel Aviv University</institution>
+				<department></department>
+				<address>
+ 
+IL</address>
+				<address_structured>
+					<street></street>
+					<postcode></postcode>
+					<town></town>
+					<country>IL</country>
+</address_structured>
+				<type>Presenter</type>
+</author>
+</authors>
+</paper>
+
+</converia_papers>
