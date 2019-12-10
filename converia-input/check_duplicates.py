@@ -42,7 +42,7 @@ import csv
 import sys
 import difflib
 
-__author__ = "Rafael Arndt, Olivier Huber, Caroline Löbhard, Steven Marian Stengl"
+__author__ = "Rafael Arndt, Olivier Huber, Caroline Löbhard, Steven-Marian Stengl"
 __copyright__ = "Copyright 2019, WIAS"
 __license__ = "GPL"
 __maintainer__ = "Caroline Löbhard"

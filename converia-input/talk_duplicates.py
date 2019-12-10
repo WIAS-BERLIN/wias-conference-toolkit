@@ -34,7 +34,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 print(copyright_string)
 
-__author__ = "Rafael Arndt, Olivier Huber, Caroline Löbhard, Steven Marian Stengl"
+__author__ = "Rafael Arndt, Olivier Huber, Caroline Löbhard, Steven-Marian Stengl"
 __copyright__ = "Copyright 2019, WIAS"
 __license__ = "GPL"
 __maintainer__ = "Caroline Löbhard"
