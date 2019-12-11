@@ -15,8 +15,8 @@ tex: xml/db.xml
 xml/db.xml: converia-input/build_xml_db.py converia-input/paper.xml converia-input/EVENT_Agenda.csv converia-input/EVENT_Personenliste.csv converia-input/log.csv converia-input/free_participation.csv converia-input/late_summer_school.csv converia-input/late_dinner.csv
 	cd converia-input; $(PYTHON) build_xml_db.py
 
-xml/schedule.xml: xml/db.xml build_schedule.py
-	$(PYTHON) build_schedule.py
+xml/schedule.xml: xml/db.xml webapp/build_schedule.py
+	cd webapp; $(PYTHON) build_schedule.py
 
 csv: xml/db.xml other/build_tubs_list.py
 	cd other; $(PYTHON) build_tubs_list.py

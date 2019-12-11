@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Builds an xml data base that can be used to for an app. 
+# 
+# Reads   The database ../xml/db.xml
+#
+# Creates app-general/schedule.xml
+#         This xml file can be uploaded to a web server, and included in a schedule viewer App
+#
+
+copyright_string = """
+*********************************************************************************************
+Copyright (c) 2019 Weierstrass Institute for Applied Analysis and Stochastics Berlin (WIAS)
+
+This file is part of the WIAS Conference Toolkit. 
+
+The WIAS Conference Toolkit is free software: you can redistribute
+it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*********************************************************************************************
+
+"""
+
+print(copyright_string)
+
+__author__ = "Rafael Arndt, Olivier Huber, Caroline Löbhard, Steven-Marian Stengl"
+__copyright__ = "Copyright 2019, WIAS"
+__license__ = "GPL"
+__maintainer__ = "Caroline Löbhard"
+__email__ = "oracline@gmail.com"
+
+import datetime
+from lxml import objectify
+from lxml import etree
+import pytz
+import uuid
+
+from html import escape  # python 3.x
+
+# Adjust dates for your event
+
+day2num = {'Mon': 5,
+           'Tue': 6,
+           'Wed': 7,
+           'Thu': 8,
+           }
+
+def get_xml_date(day):
+    return "2019-08-0{:}".format(day2num[day])
+
+def get_xml_datetz(day, time):
+    h, m = time.split(':')
+    datetimeobject = datetime.datetime(2019, 8, day2num[day], int(h), int(m))
+    localtime = pytz.timezone('Europe/Berlin').localize(datetimeobject)
+    return localtime.isoformat()
+    #return datetime.datetime(2019, 8, day2num[day], int(h), int(m)).astimezone(pytz.timezone('Europe/Berlin')).isoformat()
+
+def get_name(p_xml):
+    return " ".join((str(p_xml.first_name), str(p_xml.last_name)))
+
+xmlschema_doc = etree.parse("../xml/wias-ct.xsd")
+xmlschema = etree.XMLSchema(xmlschema_doc)
+
+parse = objectify.makeparser(schema=xmlschema)
+
+with open("../xml/db.xml", "r") as f:
+    xmltree = objectify.parse(f, parse)
+
+db_root = xmltree.getroot()
+
+sched_root = etree.Element('schedule')
+sched_xml = etree.ElementTree(sched_root)
+
+etree.SubElement(sched_root, 'version').text = "0.1"
+
+conf_xml = etree.SubElement(sched_root, 'conference')
+etree.SubElement(conf_xml, 'title').text = "EVENT FULL NAME"
+etree.SubElement(conf_xml, 'acronym').text = "EVENT ACRO"
+etree.SubElement(conf_xml, 'start').text = get_xml_date('Mon')
+etree.SubElement(conf_xml, 'end').text = get_xml_date('Thu')
+etree.SubElement(conf_xml, 'days').text = "4"
+etree.SubElement(conf_xml, 'timeslot_duration').text = "25:00"
+etree.SubElement(conf_xml, 'base_url').text = "https://wias-berlin.de"
+
+rooms = set(db_root.xpath("//room/text()"))
+
+for k, v in day2num.items():
+    day_xml = etree.SubElement(sched_root, 'day')
+    day_xml.attrib["date"] = get_xml_date(k)
+    day_xml.attrib["start"] = get_xml_datetz(k, "09:00")
+    day_xml.attrib["end"] = get_xml_datetz(k, "18:00")
+    day_xml.attrib["index"] = str(v-4)
+
+    for room in rooms:
+        room_xml = etree.SubElement(day_xml, 'room')
+        room_xml.attrib["name"] = str(room)
+        for session in db_root.schedule_sessions.xpath("./schedule_session[timeslot/day='{:}'][room='{:}']".format(k, room)):
+            start = str(session.timeslot.start)
+            ev = etree.SubElement(room_xml, 'event')
+            ev.attrib["id"] = str(session.ID)
+            ev.attrib["guid"] = str(uuid.uuid4())
+            ev.attrib["slot"] = str(session.timeslot.slot)
+            etree.SubElement(ev, 'room').text = room
+            etree.SubElement(ev, 'title').text = str(session.title)
+            etree.SubElement(ev, 'subtitle').text = ''
+            etree.SubElement(ev, 'type').text = ''
+            etree.SubElement(ev, 'date').text = get_xml_datetz(k, start)
+            etree.SubElement(ev, 'start').text = start
+            etree.SubElement(ev, 'duration').text = "1:30"
+            etree.SubElement(ev, 'abstract').text = "To be decided"
+            title_slug = str(session.title).replace(" ", "_").replace("(", "").replace(")", "")
+            etree.SubElement(ev, 'slug').text = "iccopt2019-{:}-{:}".format(session.ID, title_slug)
+            if hasattr(session, "cluster") and session.cluster > 0:
+                etree.SubElement(ev, 'track').text = db_root.schedule_sessions.xpath("//cluster[ID='{:}']/title/text()".format(session.cluster))[0]
+                ev.attrib["cluster"] = str(session.cluster)
+            else:
+                etree.SubElement(ev, 'track').text = ""
+                ev.attrib["cluster"] = "error"
+
+            presenters = []
+            if not hasattr(session, "paper"):
+                print("ERROR: session {:} has no paper".format(session.ID))
+                continue
+
+            descr = []
+            for p in session.paper:
+                paper_xml = db_root.xpath("//talk[ID='{:}']".format(p.paperid))[0]
+                presenter = db_root.xpath("//person[ID='{:}']".format(paper_xml.presenter))[0]
+                presenters.append((get_name(presenter), presenter.ID))
+                title_line = "<b> {:} </b> {:}".format(paper_xml.title, get_name(presenter))
+
+                if hasattr(p, "author"):
+                    authors = [db_root.xpath("//person[ID='{:}']".format(a)) for a in p.author]
+                else:
+                    authors = []
+
+                descr.extend((", ".join([title_line]+authors), str(paper_xml.abstract), "<br>"))
+
+            etree.SubElement(ev, 'description').text = "<br>".join(descr)
+
+with open("schedule.xml", "wb") as f:
+    f.write(etree.tostring(sched_root, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
