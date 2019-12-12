@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage[margin=3cm]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usepackage{ifthen}
+\usepackage{enumitem}
+
+\usepackage{hyperref}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\arraystretch}{1.5}
+
+\usepackage{tabularx}
+
+\newcommand{\desk}{ICCOPT Registration Desk}
+\newcommand{\dinner}{Conference Dinner}
+\newcommand{\sectionstyle}[1]{\subsection*{#1}}
+\pagenumbering{gobble}
+
+\makeatletter
+\def\chapter{\@ifnextchar[{\@with}{\@without}}
+\def\@with[#1]#2{\begin{center}\Large#2\end{center}\bigskip}
+\def\@without#1{\begin{center}#1\end{center}\bigskip}
+\makeatother
+
+\parindent0pt
+
+\definecolor{logogreen}{RGB}{162,173,6}
+\definecolor{gruen}{RGB}{142,153,6}
+\definecolor{logoorange}{RGB}{222,113,35}
+
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\setlength{\headheight}{3cm}
+\clearscrheadfoot
+\ohead{\normalfont
+  }
+\ofoot{
+\begin{tikzpicture}[remember picture, overlay]
+\coordinate (ul) at (current page.south west);
+\coordinate (ur) at (current page.south east);
+\coordinate (ol) at ([yshift=7em]current page.south west);
+\coordinate (or) at ([yshift=3em]current page.south east);
+\fill[logoorange] (ul)--(ur)--(or)--(ol)--cycle;
+\node[above right, outer sep=.75cm, black!80] at (ul) {\small Template by \href{https://wias-berlin.de}{WIAS Berlin}, \href{https://github.com/WIAS-BERLIN/wias-conference-toolkit}{wias-conference-toolkit}, \href{https://creativecommons.org/licenses/by-sa/4.0/legalcode}{CC-BY-SA}};
+\end{tikzpicture}
+}
+
+% #1 number of tickets #2 last name #3 first name #4 special guest
+\newcommand{\dinnerparticipant}[4]{
+\begin{tikzpicture}[remember picture, overlay]
+\coordinate (tol) at (current page.north west);
+\coordinate (tor) at (current page.north east);
+
+\coordinate (tul) at ([yshift=-14em]current page.north west);
+\coordinate (tur) at ([yshift=-10em]current page.north east);
+
+\fill[gray!20] (tul)--(tur)--(tor)--(tol)--cycle;
+
+\node[below right, inner sep=0.75cm] at ([xshift=1cm]tol) {\includegraphics[width=3.5cm]{ICCOPT-dark.pdf}}; 
+\node[below, inner sep=2cm] at ([xshift=2cm]current page.north) {\parbox{.8\textwidth}{{\LARGE\dinner\ \ifthenelse{\equal{#1}{0}}{}{Ticket}}\\[.5em]\large Cruise along the river Spree on the ``MS Mark Brandenburg''}}; 
+\end{tikzpicture}
+
+\input{dinner}
+
+
+\vskip2cm
+
+\ifthenelse{\equal{#1}{0}}{}{
+{  
+\centering
+\begin{tikzpicture}
+\node[draw, very thick, rounded corners, #4, text centered, inner sep = 1cm] {\parbox{.8\textwidth}{\centering\LARGE\textbf{#2, #3\\Number of tickets: #1}\\\emph{Check-in no later than 19:00}.
+}};
+\end{tikzpicture}
+}}
+\ \newpage  }
+
+\begin{document}
+\input{dinnerparticipants}
+\end{document}

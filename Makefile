@@ -12,7 +12,7 @@ tex: xml/db.xml
 	$(PYTHON) boa_best_paper.py
 	$(PYTHON) boa_semi_and_plenaries.py
 
-xml/db.xml: converia-input/build_xml_db.py converia-input/paper.xml converia-input/EVENT_Agenda.csv converia-input/EVENT_Personenliste.csv converia-input/log.csv converia-input/free_participation.csv converia-input/late_summer_school.csv converia-input/late_dinner.csv
+xml/db.xml: converia-input/build_xml_db.py converia-input/paper.xml converia-input/EVENT_Agenda.csv converia-input/EVENT_Personenliste.csv converia-input/log.csv converia-input/free_participation.csv converia-input/late_summer_school.csv converia-input/late_dinner.csv converia-input/BOARD_meeting.csv converia-input/OTHERBOARD_meeting.csv 
 	cd converia-input; $(PYTHON) build_xml_db.py
 
 xml/schedule.xml: xml/db.xml app-general/build_schedule.py
@@ -22,8 +22,8 @@ csv: xml/db.xml other/build_tubs_list.py
 	cd other; $(PYTHON) build_tubs_list.py
 
 vouchers: xml/db.xml
-	$(PYTHON) export_dinner_tickets.py
-	$(PYTHON) export_vouchers.py
+	cd vouchers; $(PYTHON) export_dinner_tickets.py
+	cd vouchers; $(PYTHON) export_vouchers.py
 	make -C $@
 
 letters/ICCOPT2019_participation-letters.tex: xml/db.xml export_participation_letters.py

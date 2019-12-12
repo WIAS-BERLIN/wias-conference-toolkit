@@ -181,6 +181,8 @@
     <xs:enumeration value="SIOPT"/>
     <xs:enumeration value="OMS"/>
     <xs:enumeration value="JNSA"/>
+    <xs:enumeration value="BOARD"/>
+    <xs:enumeration value="OTHERBOARD"/>
   </xs:restriction>
 </xs:simpleType>
 

@@ -1,4 +1,4 @@
-# WIAS Conference Toolkit#
+# WIAS Conference Toolkit #
 
 *This is an uncomplete preliminary version. We are just about to include all facilities.*
 
