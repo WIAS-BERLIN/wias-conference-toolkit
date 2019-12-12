@@ -32,11 +32,17 @@ letters/ICCOPT2019_participation-letters.tex: xml/db.xml export_participation_le
 letters/summer-school_participation-letters.tex: xml/db.xml export_summerschool_letters.py
 	$(PYTHON) export_summerschool_letters.py
 
-summer_school/summer-school-participants.tex: xml/db.xml build_summer_school_nametags.py
-	$(PYTHON) build_summer_school_nametags.py
+badges/summer-school-participants.tex: xml/db.xml badges/build_badges.py
+	cd badges; $(PYTHON) build_badges.py
 
-summer_school/nametags.pdf: summer_school/nametags.tex summer_school/summer-school-participants.tex
-	make -C summer_school
+badges/all-participants.tex: xml/db.xml badges/build_badges.py
+	cd badges; $(PYTHON) build_badges.py
+
+badges/badges.pdf: badges/build_badges.py badges/badges.tex badges/badges_summer_school.tex badges/all-participants.tex badges/summer-school-participants.tex
+	cd badges; $(PYTHON) build_badges.py
+	make -C badges
+
+badges: badges/badges.pdf badges/badges_summer_school.pdf
 
 letters: letters/ICCOPT2019_participation-letters.tex letters/summer-school_participation-letters.tex
 	make -C $@

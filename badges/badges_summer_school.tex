@@ -1,0 +1,70 @@
+
+\documentclass[]{scrartcl}
+\usepackage[cmyk]{xcolor}
+
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+
+
+%\usepackage{fontspec}
+%\newfontfamily{\lemonmilk}{LemonMilk}[Path=./,Extension = .otf]
+%\newcommand{\lemonmilk}[1]{#1}
+
+\setlength{\columnsep}{0mm}
+
+\geometry{left=19mm,
+right=19mm,
+top=11mm,
+bottom=11mm,
+paperwidth=210mm,
+paperheight=297mm,
+}
+
+\tikzset{
+    innerbox/.style={
+      line width = 5pt,
+      rounded corners,
+      text width=80mm,
+      minimum height=49mm,
+      align=center,
+      inner sep=0pt,
+      outer sep=0pt,
+    },
+}
+
+\definecolor{logogreen}{RGB}{162,173,6}
+\definecolor{gruen}{RGB}{142,153,6}
+\definecolor{logoorange}{RGB}{222,113,35}
+\definecolor{berlincolor}{cmyk}{0,.655,.923,0}
+
+\parindent0pt
+
+\renewcommand{\familydefault}{\sfdefault}
+\setlength\fboxsep{0pt}
+
+\newlength\tagw
+\setlength{\tagw}{43mm}
+\addtolength\tagw{-.55pt}
+
+\newlength\tagh
+\setlength{\tagh}{27.5mm}
+\addtolength\tagh{-.45pt}
+
+\newcommand{\nametag}[3]{\begin{tikzpicture}
+        \clip (-\tagw,-\tagh) rectangle (\tagw,\tagh);
+%        \node[innerbox, draw=logoorange] at (0,0) {};
+%    \fill[black!10] (-42.5mm,-27.5mm) rectangle (42.5mm,27.5mm);
+%    \clip (0,0) rectangle (85mm,55mm);
+    \node at (-23mm, 10mm) {\includegraphics[width=0.35\columnwidth]{ICCOPT2019-dark_cmyk.pdf}};
+    \node at (17mm,7.8mm) {{\textcolor{berlincolor}{{\large Summer School}}}};
+    \node[align=center,font=#3] at (0,-13mm) {\textcolor{black}{#1 #2}};
+\end{tikzpicture}\\[0pt]}
+
+\begin{document}
+
+\begin{multicols}{2}
+\input{summer-school-participants}
+\end{multicols}
+\end{document}
