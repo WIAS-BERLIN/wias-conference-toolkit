@@ -45,7 +45,6 @@ from lxml import etree, objectify
 
 import syspath
 syspath.append_parent_path()
-
 import wiasct
 
 db_root = wiasct.parse_iccopt_db('../xml/')

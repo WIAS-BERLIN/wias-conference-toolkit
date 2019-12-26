@@ -30,5 +30,5 @@ The facilities provided in this toolkit include the following:
    Duplicate talks can be detected with the help of converia-input/talk\_duplicates.py
 2. If available, include information on the registration/payment status, and more into the according files. 
    See input files in converia-input/README.md
-3. Build the data base with the help of converia-input/build\_xml\_db.py
+3. Build the data base with the help of converia-input/build\_xml\_db.py (use <pre>make xml/db.xml</pre>)
 4. You can now use all other facilities. 

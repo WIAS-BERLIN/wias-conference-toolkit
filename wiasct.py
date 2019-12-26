@@ -1,20 +1,36 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-
-# File name: converia.py
-# Author: Caroline Loebhard
-# Python Version: >=3.4
+#
 # 
 # Module with scripts that help to process converia data
 #
-# Reads   the file paper.xml which can be downloaded from Converia
-#         the file old_paper.xml with the status of submission on Mar 18. 
+
+
+# *********************************************************************************************
+# Copyright (c) 2019 Weierstrass Institute for Applied Analysis and Stochastics Berlin (WIAS)
 #
-# Creates pdf-files with an overview on all talks for each cluster in the subfolder pdf_files/
-#         the respective tex-files in the subfolder tex_files (to compile by hand, move them to this folder)
-#         output text with numbers of submitted talks etc. 
-#
+# This file is part of the WIAS Conference Toolkit. 
+# 
+# The WIAS Conference Toolkit is free software: you can redistribute
+# it and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# *********************************************************************************************
+
+__author__ = "Rafael Arndt, Olivier Huber, Caroline Löbhard, Steven-Marian Stengl"
+__copyright__ = "Copyright 2019, WIAS"
+__license__ = "GPL"
+__maintainer__ = "Caroline Löbhard"
+__email__ = "oracline@gmail.com"
+
 
 
 
@@ -289,80 +305,6 @@ def talk_starttime_string(s_sess_id, db_root, time_offset_talks = 0):
     (h_n, m_n) = divmod(shifted_time_in_minutes, 60)
     return "{}:{}".format(h_n, str(m_n).zfill(2)) #the new start time
 
-def session_pretty_string(s_sess_id, db_root, time_offset_talks = 0, with_time = True):
-    s_sess = db_root.xpath("//schedule_session[ID='{s_sess_id}']".format(s_sess_id=s_sess_id))[0]
-
-    #pretty_string = ".".join([
-    #    s_sess.find("timeslot").find("day").text,
-    #    s_sess.find("timeslot").find("slot").text,
-    #    s_sess.find("room").text,
-    #])
-
-    #TODO: MEMORIAL SESSION ABFAHNGEN und time-start-and-end angeben!!!!!
-
-    if s_sess.find("ID").text == "10470": #memorial session
-        #with_time = 2 #start and finish time
-        time_offset_talks = 0
-        memorial_session = True
-    else:
-        #with_time = 1 #only start time
-        memorial_session = False
-
-    #do we need to distinguis
-    if with_time:
-
-        start_time = s_sess.find('timeslot').find('start').text
-        end_time = s_sess.find('timeslot').find('end').text
-        if with_time == 1:
-
-            #memorial session is different()
-            #otherwise 25 minutes
-            #check semiplenary
-            minute_shift = time_offset_talks*25
-            (h_s, m_s) = start_time.split(':')
-            shifted_time_in_minutes = 60*int(h_s) + int(m_s) + minute_shift
-            (h_n, m_n) = divmod(shifted_time_in_minutes, 60)
-            start_time = "{}:{}".format(h_n, str(m_n).zfill(2)) #the new start time
-            time_string = start_time
-
-        elif with_time == 2:
-            if not time_offset_talks==0:
-                print("ERROR: no start-end for offset-timeslot possible")
-                sys.exit(1)
-
-            time_string = '{:}--{:}'.format(start_time,end_time)
-        time_string += ", "
-    else:
-        time_string = ""
-
-    slot_number = s_sess.find("timeslot").find("slot").text
-    if "SP" in slot_number:
-        #slot_and_time = ", " + time_string + "\\textbf{Semiplenary talk}" + ", "
-        slot_and_time = ", " + time_string + "Semi-Plenary Talk" + ", "
-    elif "BP" in slot_number:
-        slot_and_time = ", " + time_string + "Best Paper Session" + ", "
-    elif "P" in slot_number: #must be behind SP and BP!!!
-        slot_and_time = ", " + time_string + "Plenary Talk" + ", "
-        #slot_and_time = ", " + time_string + "\\textbf{Plenary talk}" + ", "
-    elif memorial_session:
-        slot_and_time = ", " + time_string + "Memorial Session" + ", "
-        #slot_and_time = ", " + "Memorial session, " + time_string
-        #slot_and_time = ", " + "Memorial session (" + time_string.replace(", ", "") + "), "
-    else:
-        slot_and_time = "." + slot_number + ", " + time_string
-
-    room_str = s_sess.find("room").text
-    if room_str != room_str.strip():
-        print("WARNING: ", "\""+room_str+"\"", "contains too many spaces!")
-    pretty_string = s_sess.find("timeslot").find("day").text + slot_and_time + room_str.strip()
-    #times
-
-    return pretty_string
-
-#**instead of schedule sessions starting times we want talk-starting-times**#
-
-
-#db_root.xpath("//person[ID='{:}']")
 
 ##### name-corrections ####
 

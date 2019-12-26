@@ -15,7 +15,7 @@ tex: xml/db.xml
 xml/db.xml: converia-input/build_xml_db.py converia-input/paper.xml converia-input/EVENT_Agenda.csv converia-input/EVENT_Personenliste.csv converia-input/log.csv converia-input/free_participation.csv converia-input/late_summer_school.csv converia-input/late_dinner.csv converia-input/BOARD_meeting.csv converia-input/OTHERBOARD_meeting.csv 
 	cd converia-input; $(PYTHON) build_xml_db.py
 
-xml/schedule.xml: xml/db.xml app-general/build_schedule.py
+app-general/schedule.xml: xml/db.xml app-general/build_schedule.py
 	cd app-general; $(PYTHON) build_schedule.py
 
 csv: xml/db.xml other/build_tubs_list.py
@@ -25,12 +25,6 @@ vouchers: xml/db.xml
 	cd vouchers; $(PYTHON) export_dinner_tickets.py
 	cd vouchers; $(PYTHON) export_vouchers.py
 	make -C $@
-
-letters/ICCOPT2019_participation-letters.tex: xml/db.xml export_participation_letters.py
-	$(PYTHON) export_participation_letters.py
-
-letters/summer-school_participation-letters.tex: xml/db.xml export_summerschool_letters.py
-	$(PYTHON) export_summerschool_letters.py
 
 badges/summer-school-participants.tex: xml/db.xml badges/build_badges.py
 	cd badges; $(PYTHON) build_badges.py
@@ -44,7 +38,16 @@ badges/badges.pdf: badges/build_badges.py badges/badges.tex badges/badges_summer
 
 badges: badges/badges.pdf badges/badges_summer_school.pdf
 
-letters: letters/ICCOPT2019_participation-letters.tex letters/summer-school_participation-letters.tex
+letters/ICCOPT2019_participation-letters.tex: xml/db.xml export_participation_letters.py
+	$(PYTHON) export_participation_letters.py
+
+participation_letters/participation-letters.tex: xml/db.xml participation_letters/export_participation_letters.py
+	cd participation_letters; $(PYTHON) export_participation_letters.py
+
+participation_letters/summer-school_participation-letters.tex: xml/db.xml participation_letters/export_summerschool_letters.py
+	cd participation_letters; $(PYTHON) export_summerschool_letters.py
+
+participation_letters: participation_letters/participation-letters.tex letters/summer-school_participation-letters.tex
 	make -C $@
 
 upload: letters csv summer_school/nametags.pdf vouchers dinner_refund.csv
