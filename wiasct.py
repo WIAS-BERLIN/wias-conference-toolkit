@@ -46,6 +46,8 @@ import unicodedata
 
 import correctiontables as corr
 
+import config.config as config
+
 start2slot = OrderedDict(
              (("05.08.2019 09:30", 'P'),
               ("05.08.2019 11:00", 1),
@@ -127,25 +129,6 @@ sessionslot2num = {'Mon1': 1,
            'Thu3': 12,
            }
 
-email_footer = """
-Best regards,
-Local Organizers of the ICCOPT 2019
-
-------------------------------------
-Weierstrass Institute for Applied Analysis and Stochastics (WIAS)
-Leibniz Institute in Forschungsverbund Berlin e.V.
-(member of Leibniz Association)
-------------------------------------
-Mohrenstr. 39
-10117 Berlin
-Germany
-------------------------------------
-e-mail: info@iccopt2019.berlin
-phone:  +49 30 20372-583 (Cecilia Bonetti)
-fax:    +49 30 20372-300
-web:    https://iccopt2019.berlin
-------------------------------------
-"""
 
 flag_not_register = False
 
