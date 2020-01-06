@@ -41,8 +41,8 @@ class Node():
     def get_url(self):
         return self.get_filepath()
 
-    def render(self, recursive=True, engine="html", **kwargs):
-        if engine=="plain":
+    def render(self, recursive=True, output_format="html", **kwargs):
+        if output_format=="plain":
             self._render_plain(**kwargs)
             if "indent" in kwargs.keys():
                 kwargs["indent"] += 2
@@ -52,7 +52,7 @@ class Node():
             self._render_html(**kwargs)
         if recursive:
             for child in self.children:
-                child.render(recursive=True, engine=engine, **kwargs)
+                child.render(recursive=True, output_format=output_format, **kwargs)
 
     #this method could possibly be redefined in every subclass for more specific output
     def _render_plain(self, template=None, outfile=None, recursive=True, indent=0, **kwargs):
@@ -301,4 +301,4 @@ class HomeWiasct(Node): #wiasct-format
 #g.add_node(RootSchedule)
 #g.add_node(MetaRoomsSchedule)
 #g.add_node(MetaClustersSchedule)
-#g.render_all_nodes(engine = "html", entry_node_id = "index", output_dir = "out")
+#g.render_all_nodes(output_format = "html", entry_node_id = "index", output_dir = "out")
