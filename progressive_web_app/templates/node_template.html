@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>
+			{{properties.title}}
+		</title>
+	</head>
+	<body>
+		<h1>{{properties.title}}</h1>
+		<h2>Properties</h2>
+		<ul>
+{% for k, v in properties.items() %}
+			<li>{{k}}: <b>{{v}}</b></li>
+{% endfor %}
+		</ul>
+{% if children %}
+		<h2>Children</h2>
+		<ul>
+{% for child in children %}
+			<li><a href='{{child.get_url()}}'>{{child.properties.title}}</a></li>
+{% endfor %}
+		</ul>
+{% endif %}
+{% if parent %}
+		<h2>Parent</h2>
+			<ul><li><a href='{{parent.get_url()}}'>parent {{parent.properties.title}}</a></li></ul>
+{% endif %}
+	</body>
+</html>
