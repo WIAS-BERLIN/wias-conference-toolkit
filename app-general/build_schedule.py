@@ -44,26 +44,15 @@ from lxml import objectify
 from lxml import etree
 import pytz
 import uuid
-
 from html import escape  # python 3.x
 
-# Adjust dates for your event
+import syspath
+syspath.append_parent_path()
+import config
 
-day2num = {'Mon': 5,
-           'Tue': 6,
-           'Wed': 7,
-           'Thu': 8,
-           }
 
-def get_xml_date(day):
-    return "2019-08-0{:}".format(day2num[day])
+# Adjust dates for your event in ../config/__init__.py
 
-def get_xml_datetz(day, time):
-    h, m = time.split(':')
-    datetimeobject = datetime.datetime(2019, 8, day2num[day], int(h), int(m))
-    localtime = pytz.timezone('Europe/Berlin').localize(datetimeobject)
-    return localtime.isoformat()
-    #return datetime.datetime(2019, 8, day2num[day], int(h), int(m)).astimezone(pytz.timezone('Europe/Berlin')).isoformat()
 
 def get_name(p_xml):
     return " ".join((str(p_xml.first_name), str(p_xml.last_name)))
@@ -84,22 +73,22 @@ sched_xml = etree.ElementTree(sched_root)
 etree.SubElement(sched_root, 'version').text = "0.1"
 
 conf_xml = etree.SubElement(sched_root, 'conference')
-etree.SubElement(conf_xml, 'title').text = "EVENT FULL NAME"
-etree.SubElement(conf_xml, 'acronym').text = "EVENT ACRO"
-etree.SubElement(conf_xml, 'start').text = get_xml_date('Mon')
-etree.SubElement(conf_xml, 'end').text = get_xml_date('Thu')
-etree.SubElement(conf_xml, 'days').text = "4"
-etree.SubElement(conf_xml, 'timeslot_duration').text = "25:00"
-etree.SubElement(conf_xml, 'base_url').text = "https://wias-berlin.de"
+etree.SubElement(conf_xml, 'title').text = config.conference_name
+etree.SubElement(conf_xml, 'acronym').text = config.conference_acronym
+etree.SubElement(conf_xml, 'start').text = config.firstday
+etree.SubElement(conf_xml, 'end').text = config.lastday
+etree.SubElement(conf_xml, 'days').text = str(len(config.day2num))
+etree.SubElement(conf_xml, 'timeslot_duration').text = "{:}:00".format(str(config.timeslotduration))
+etree.SubElement(conf_xml, 'base_url').text = config.baseurl
 
 rooms = set(db_root.xpath("//room/text()"))
 
-for k, v in day2num.items():
+for k, v in config.day2num.items():
     day_xml = etree.SubElement(sched_root, 'day')
-    day_xml.attrib["date"] = get_xml_date(k)
-    day_xml.attrib["start"] = get_xml_datetz(k, "09:00")
-    day_xml.attrib["end"] = get_xml_datetz(k, "18:00")
-    day_xml.attrib["index"] = str(v-4)
+    day_xml.attrib["date"] = config.get_xml_date(k)
+    day_xml.attrib["start"] = config.get_xml_datetz(k, config.day_start_time)
+    day_xml.attrib["end"] = config.get_xml_datetz(k, config.day_end_time)
+    day_xml.attrib["index"] = str(v-config.index_offset)
 
     for room in rooms:
         room_xml = etree.SubElement(day_xml, 'room')
@@ -114,12 +103,12 @@ for k, v in day2num.items():
             etree.SubElement(ev, 'title').text = str(session.title)
             etree.SubElement(ev, 'subtitle').text = ''
             etree.SubElement(ev, 'type').text = ''
-            etree.SubElement(ev, 'date').text = get_xml_datetz(k, start)
+            etree.SubElement(ev, 'date').text = config.get_xml_datetz(k, start)
             etree.SubElement(ev, 'start').text = start
-            etree.SubElement(ev, 'duration').text = "1:30"
+            etree.SubElement(ev, 'duration').text = config.sessionslotduration
             etree.SubElement(ev, 'abstract').text = "To be decided"
             title_slug = str(session.title).replace(" ", "_").replace("(", "").replace(")", "")
-            etree.SubElement(ev, 'slug').text = "iccopt2019-{:}-{:}".format(session.ID, title_slug)
+            etree.SubElement(ev, 'slug').text = "{:}-{:}-{:}".format(config.conference_slug,session.ID, title_slug)
             if hasattr(session, "cluster") and session.cluster > 0:
                 etree.SubElement(ev, 'track').text = db_root.schedule_sessions.xpath("//cluster[ID='{:}']/title/text()".format(session.cluster))[0]
                 ev.attrib["cluster"] = str(session.cluster)

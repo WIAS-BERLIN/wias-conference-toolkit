@@ -46,89 +46,17 @@ import unicodedata
 
 import correctiontables as corr
 
-import config.config as config
+import config
 
-start2slot = OrderedDict(
-             (("05.08.2019 09:30", 'P'),
-              ("05.08.2019 11:00", 1),
-              ("05.08.2019 13:45", 2),
-              ("05.08.2019 15:30", 'SP'),
-              ("05.08.2019 16:20", 'BP'),
-              ("06.08.2019 09:00", 'P'),
-              ("06.08.2019 10:30", 1),
-              ("06.08.2019 13:15", 2),
-              ("06.08.2019 14:45", 3),
-              ("06.08.2019 16:30", 4),
-              ("07.08.2019 09:00", 'P'),
-              ("07.08.2019 10:15", 'SP1'),
-              ("07.08.2019 11:30", 1),
-              ("07.08.2019 14:15", 2),
-              ("07.08.2019 16:00", 3),
-              ("07.08.2019 17:30", 'SP2'),
-              ("08.08.2019 09:00", 1),
-              ("08.08.2019 10:45", 2),
-              ("08.08.2019 13:30", 3),
-              ("08.08.2019 15:15", 'SP'),
-              ("08.08.2019 16:15", 'P'),
-              ))
+start2slot = config.start2slot
 
-day2str = {"05.08.2019": "Mon",
-           "06.08.2019": "Tue",
-           "07.08.2019": "Wed",
-           "08.08.2019": "Thu",
-          }
+day2str = config.day2str
 
+room2size = config.room2size
 
-room2size = {"H 0104": "644",
-             "H 0105": "1192",
-             "H 0106": "99",
-             "H 0107": "144",
-             "H 0110": "193",
-             "H 1012": "254",
-             "H 1058": "244",
-             "H 1029": "70",
-             "H 3013": "40",
-             "H 3007": "80",
-             "H 3006": "100",
-             "H 3012": "40",
-             "H 3025": "50",
-             "H 3008": "30",
-             "H 2038": "50",
-             "H 3004": "50",
-             "H 3002": "40",
-             "H 2032": "235",
-             "H 0112": "99",
-             "H 2035": "28",
-             "H 2037": "28",
-             "H 2036": "36",
-             "H 3005": "48",
-             "H 0111": "99",
-             "H 1028": "231",
-             "H 2013": "260",
-             "H 2053": "243",
-             "H 2033": "46",
-          }
+day2num = config.day2num
 
-day2num = {'Mon': 5,
-           'Tue': 6,
-           'Wed': 7,
-           'Thu': 8,
-           }
-
-sessionslot2num = {'Mon1': 1,
-           'Mon2': 2,
-           'Tue1': 3,
-           'Tue2': 4,
-           'Tue3': 5,
-           'Tue4': 6,
-           'Wed1': 7,
-           'Wed2': 8,
-           'Wed3': 9,
-           'Thu1': 10,
-           'Thu2': 11,
-           'Thu3': 12,
-           }
-
+sessionslot2num = config.sessionslot2num
 
 flag_not_register = False
 
@@ -149,7 +77,6 @@ def insession(paper,session,presentationform):
 
 def incluster(paper,topic,presentationform):
     return (paper.find('paper_type').text=='PAPER' and paper.find('presentationform').text==presentationform and paper.find('topiclist').find('topic').find('name').text==topic and paper.find('paper_paper_id').text==None)
-
 
 
 #make the mathematic formulas in the abstracts nice
@@ -227,7 +154,7 @@ def late_submissions(root, old_root):
         
     # collect all talk IDs from paper.xml, which are not in old_list
     late_list = []
-    late_string = 'Submitted after Mar 18:\n\n'
+    late_string = 'Submitted after {}:\n\n'.format(config.old_paper_date)
     
     for talk in root:
         if talk.find('paper_type').text=='PAPER' and talk.get('id') not in old_list:
@@ -267,26 +194,6 @@ def cluster_shortcuts_latex(root):
     return(tex_text)
 
 #### create human-readable session-identification-string ####
-
-##!! there is a similar function further below. This one here might be deprecated
-def talk_starttime_string(s_sess_id, db_root, time_offset_talks = 0):
-    s_sess = db_root.xpath("//schedule_session[ID='{s_sess_id}']".format(s_sess_id=s_sess_id))[0]
-    start_time = s_sess.find('timeslot').find('start').text
-
-    multiplyer = 25
-    #memorial session would be different offset
-    if s_sess.find("ID").text == "10470": #memorial session
-        print("ERROR: you never want offset time for memorial session")
-        sys.exit(1)
-    elif s_sess.find("ID").text == "10461": #Best Paper Session
-        multiplyer = 30
-    #also best paper session:
-
-    minute_shift = time_offset_talks*multiplyer
-    (h_s, m_s) = start_time.split(':')
-    shifted_time_in_minutes = 60*int(h_s) + int(m_s) + minute_shift
-    (h_n, m_n) = divmod(shifted_time_in_minutes, 60)
-    return "{}:{}".format(h_n, str(m_n).zfill(2)) #the new start time
 
 
 ##### name-corrections ####
