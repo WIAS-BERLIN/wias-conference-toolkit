@@ -2,6 +2,11 @@ import jinja2
 from lxml import etree
 from lxml import objectify
 from pathlib import Path
+import sys, errno
+
+#ignore when pipe is closed while program is still running (can happen when piping into head)
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE, SIG_DFL)
 
 class Node():
     html_template = "templates/node_template.html"
@@ -57,9 +62,21 @@ class Node():
     #this method could possibly be redefined in every subclass for more specific output
     def _render_plain(self, template=None, outfile=None, recursive=True, indent=0, **kwargs):
         #geht das auch gut mit jinja temlating? waeren wahrscheinlich zu viele files dann
-        print(" "*indent, self.node_type.upper())
+        print(" "*indent, '\\\\'+self.node_type.lower()+'//')
+        #try:
+        #    sys.stdout.write("".join([" "*indent, self.node_type.upper(), '\n']))
+        #except IOError as e:
+        #    # when pipe is not present anymore (for example due to piping into head), stop the program
+        #    if e.errno == errno.EPIPE:
+        #        exit(0)
         for k, v in self.properties.items():
-            print(" "*indent, k, ":", v)
+            print(" "*indent, ' |'+k+':', v)
+            #try:
+            #    sys.stdout.write("".join([" "*indent, k, ":", v, '\n']))
+            #except IOError as e:
+            #    # when pipe is not present anymore (for example due to piping into head), stop the program
+            #    if e.errno == errno.EPIPE:
+            #        exit(0)
         #do some textwrap here
 
     def _render_html(self, template=None, outfile=None, recursive=True, **kwargs):
@@ -88,7 +105,7 @@ class Node():
 
 
 class Graph():
-    def __init__(self, xml_file, config=None, parent_expression=None, db_format="schedule.xml"):
+    def __init__(self, xml_file, config=None, parent_expression=None):
         self.all_nodes = []
         self.root_nodes = []
         self.id2node = dict()
@@ -96,7 +113,6 @@ class Graph():
         self.cluster2schedulesessions = dict()
 
         self.xml_file = xml_file
-        self.db_format = db_format
 
         #lxml
         parser = objectify.makeparser()
@@ -139,23 +155,6 @@ class Graph():
             self.cluster2schedulesessions[cluster].add(node)
 
     def add_node(self, node_cls, **kwargs):
-        if type(node_cls) == str:
-            if self.db_format == "schedule.xml":
-                if node_cls == "index":
-                    node_cls = RootSchedule
-                elif node_cls == "room_overview":
-                    node_cls = MetaRoomsSchedule
-                elif node_cls == "clusters_overview":
-                    node_cls = MetaClustersSchedule
-                else:
-                    print("[ERROR] node type unknown")
-            elif self.db_format == "wiasct":
-                if node_cls == "index":
-                    node_cls = HomeWiasct
-                else:
-                    print("[ERROR] node type unknown")
-            else:
-                print("[ERROR] db_format unknown")
         self.root_nodes.append(node_cls(self, **kwargs))
 
     def render_all_nodes(self, recursive=True, entry_node_id=None, **kwargs):
@@ -170,6 +169,19 @@ class Graph():
             for node in self.all_nodes:
                 node.render(**kwargs)
 
+class SchedulexmlGraph(Graph):
+    def add_node(self, node_cls, **kwargs):
+        if type(node_cls) == str:
+            if node_cls == "index":
+                node_cls = RootSchedule
+            elif node_cls == "rooms_overview":
+                node_cls = MetaRoomsSchedule
+            elif node_cls == "clusters_overview":
+                node_cls = MetaClustersSchedule
+            else:
+                print("[ERROR] node type unknown")
+        self.root_nodes.append(node_cls(self, **kwargs))
+
 #BEGIN# schedule.xml structure
 class EventSchedule(Node):
     #html_template = "templates/template.html"
@@ -177,8 +189,14 @@ class EventSchedule(Node):
 
     def set_properties(self):
         self.properties["node_id"] = str(self.xml_element.attrib["id"])
+        self.properties["date"] = str(self.xml_element.find("date"))
         self.properties["title"] = str(self.xml_element.find("title"))
         self.properties["start"] = str(self.xml_element.find("start"))
+        self.properties["duration"] = str(self.xml_element.find("duration"))
+        self.properties["slot"] = str(self.xml_element.attrib["slot"])
+        self.properties["cluster"] = str(self.xml_element.attrib["cluster"])
+        if self.properties["cluster"]=="5":
+            self.properties["cluster_name"] = "Cluster 5"
 
 class RoomSchedule(Node):
     #html_template = "templates/template.html"
