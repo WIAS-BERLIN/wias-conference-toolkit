@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Rebuilds the list EVENT_Registrationlist.csv from the data base ../xml/db.xml. This can help if late changes/cancelations are tracked in this data management system, but the conference admoinistration nevertheless needs the data in the original list format. 
+# Rebuilds the list EVENT_Registrationlist.csv from the data base ../xml/db.xml. This can help if late changes/cancelations are tracked in this data management system, but the conference administration nevertheless needs the data in the original list format. 
 # 
 # Reads   The database ../xml/db.xml
 #

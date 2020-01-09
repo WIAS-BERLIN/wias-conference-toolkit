@@ -14,7 +14,7 @@ A minimalistic workflow with Giggity is for instance:
 
 ## Usage
 
-The date, event name, time slot length etc. need to be adjusted manually in the script 'build_schedule.py'. 
+The date, event name, time slot length etc. need to be adjusted manually in ../config/\_\_init\_\_.py
 
 #### Reads
 

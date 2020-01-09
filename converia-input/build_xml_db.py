@@ -1132,7 +1132,7 @@ def serialize_simple(p_xml, name, obj):
 
 xml_methods = {'address': serialize_simple}
 
-db_root = etree.Element('iccopt2019')
+db_root = etree.Element('wiasct')
 db_xml = etree.ElementTree(db_root)
 
 participants_xml = etree.SubElement(db_root, "participants")
