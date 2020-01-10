@@ -147,6 +147,7 @@ web:    https://iccopt2019.berlin
 ------------------------------------
 """
 
+#TODO: probably not all these definitions are needed
 boa_colors = {
     "plenary":        ("HTML",  "de7123"),
     "semiplenary":    ("HTML",  "e2a300"),
