@@ -273,7 +273,7 @@
 </xs:complexType>
 
 
-<xs:element name="wiasct">
+<xs:element name="wiasct_conference">
  <xs:complexType>
   <xs:all>
    <xs:element name="participants">
