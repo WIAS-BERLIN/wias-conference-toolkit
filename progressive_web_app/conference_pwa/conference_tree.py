@@ -195,8 +195,7 @@ class EventSchedule(Node):
         self.properties["duration"] = str(self.xml_element.find("duration"))
         self.properties["slot"] = str(self.xml_element.attrib["slot"])
         self.properties["cluster"] = str(self.xml_element.attrib["cluster"])
-        if self.properties["cluster"]=="5":
-            self.properties["cluster_name"] = "Cluster 5"
+        self.properties["cluster_name"] = "Cluster " + self.properties["cluster"]
 
 class RoomSchedule(Node):
     #html_template = "templates/template.html"

@@ -71,4 +71,7 @@ webapp/website/slots/Mon_1.html: xml/db.xml webapp/templates/*
 
 webapp: webapp/website/slots/Mon_1.html
 
-all: xml/schedule.xml tex csv vouchers letters summer_school/nametags.pdf boa/ICCOPT2019_Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf
+pwa: xml/db.xml
+	cd progressive_web_app; $(PYTHON) build_pwa.py
+
+all: app-general/schedule.xml tex csv vouchers letters summer_school/nametags.pdf boa/ICCOPT2019_Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf

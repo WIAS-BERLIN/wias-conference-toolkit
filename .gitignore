@@ -25,6 +25,7 @@ converia-input/info-files/*
 xml/rosetta-proposed.csv
 
 progressive_web_app/out/*
+progressive_web_app/out.txt
 
 *.synctex.gz
 *.pdf

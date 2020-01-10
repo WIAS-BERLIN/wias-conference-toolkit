@@ -465,6 +465,7 @@ def get_starttime(talk_node=None, talk_id=None):
 def get_first_and_last_name(person_node):
     return person_node.first_name+" "+person_node.last_name
 
+#used by qget for easily querying certain related objects
 path_to_id = {
     "schedule_session": {
         "chair": ("./chair", True, "//person"),
@@ -489,6 +490,8 @@ functions_for_lookup = {
     "person": {"first_last": get_first_and_last_name},
 }
 
+#queries a related object in the database.
+#TODO: documentation: possibe *identifiers should be explained
 def qget(node, *identifiers):
     if type(node) is list:
         rv = [qget(n, *identifiers) for n in node]
@@ -524,3 +527,51 @@ def qget(node, *identifiers):
         return query_ans
 #def get_fln(node, identifier):
 #    return get_property(node, identifier, "first_last")
+
+class Color():
+    def __init__(self, name, input_format, arg1, arg2=None, arg3=None):
+        self.name = name
+        self.input_format = input_format
+        if input_format == "rgb":
+            self.rgb = (arg1, arg2, arg3)
+            self.RGB = tuple(round(v*255) for v in self.rgb)
+            self.HTML = "".join([f"{V:02x}" for V in self.RGB])
+        if input_format == "RGB":
+            self.RGB = (arg1, arg2, arg3)
+            self.rgb = tuple(V/255 for V in self.RGB)
+            self.HTML = "".join([f"{V:02x}" for V in self.RGB])
+        if input_format == "HTML":
+            self.HTML = arg1
+            RR = self.HTML[0:2]
+            GG = self.HTML[2:4]
+            BB = self.HTML[4:6]
+            self.RGB = tuple(int(f"0x{V}", 0) for V in (RR, GG, BB))
+            self.rgb = tuple(V/255 for V in self.RGB)
+
+    def copy(self, new_name):
+        if self.input_format == "HTML":
+            return Color(new_name, self.input_format, self.HTML)
+        elif self.input_format == "RGB":
+            return Color(new_name, self.input_format, *self.RGB)
+        elif self.input_format == "rgb":
+            return Color(new_name, self.input_format, *self.rgb)
+
+    def to_string(self, fmt_string):
+        if fmt_string == "rgb":
+            return ", ".join([str(v) for v in self.rgb])
+        if fmt_string == "RGB":
+            return ", ".join([str(V) for V in self.RGB])
+        if fmt_string == "HTML":
+            return self.HTML
+    
+    def tex_definition(self, fmt=None):
+        if fmt == None:
+            fmt = self.input_format
+        return f"\\definecolor{{{self.name}}}{{{fmt}}}{{{self.to_string(fmt)}}}"
+
+color_dict = dict()
+for name, colordef in config.boa_colors.items():
+    if type(colordef) == str:
+        color_dict[name] = color_dict[colordef].copy(name)
+    else:
+        color_dict[name] = Color(name, *colordef)
