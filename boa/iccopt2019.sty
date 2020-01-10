@@ -1,0 +1,1514 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{iccopt2019}[2019/06/19 ICCOPT2019 Book of Abstracts]
+
+\newif\if@cutoffborders\@cutoffbordersfalse	% needed???
+\DeclareOption{print}{%
+	\@cutoffborderstrue%	for setting length of \cutoffborder
+}
+
+\DeclareOption{draft}{
+ \draftmodetrue
+}
+
+\ProcessOptions\relax
+
+%\RequirePackage[english]{babel}
+\RequirePackage{imakeidx}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{geometry}
+\RequirePackage{layout}
+\RequirePackage{xcolor}
+\RequirePackage{calc}
+\RequirePackage{afterpage}
+\RequirePackage{ifthen}
+\RequirePackage{lmodern}
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+\RequirePackage{wrapfig}
+
+% Taken from http://www.khirevich.com/latex/microtype/, maybe worth reading the whole thing
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=20,shrink=20]{microtype}
+
+%needed for the ifsubstr, maybe there is a way around it ...
+\RequirePackage{xstring}
+ 
+% It's always good to include hyperref as the last package
+\RequirePackage[hidelinks]{hyperref}
+\makeindex
+
+\widowpenalty100000
+\clubpenalty100000
+
+%\RequirePackage{pdflscape}
+
+%\overfullrule=2cm
+
+
+
+
+
+\newcommand{\desk}{ICCOPT Registration Desk}
+\newcommand{\boa}{Conference Book}
+\newcommand{\dinner}{Conference Dinner}
+
+
+
+%% % colors for cluster
+%% \definecolor{plenary}{HTML}{de7123}
+%% \definecolor{semiplenary}{HTML}{e2a300}
+%% %
+%% \definecolor{cluster1}{HTML}{888888}
+%% \definecolor{cluster2}{HTML}{624300}
+%% \definecolor{cluster3}{HTML}{ff1e1e}
+%% \definecolor{cluster4}{HTML}{126a37}
+%% \definecolor{cluster5}{HTML}{00a8a6}
+%% \definecolor{cluster6}{HTML}{e500d9}
+%% \definecolor{cluster7}{HTML}{144c83}
+%% \definecolor{cluster8}{HTML}{8f18ff}
+%% \definecolor{cluster9}{HTML}{00a50c}
+%% \definecolor{cluster10}{HTML}{a01111}
+%% \definecolor{cluster11}{HTML}{ff8104}
+%% \definecolor{cluster12}{HTML}{76115a}
+%% \definecolor{cluster13}{HTML}{474ef6}
+%% \definecolor{cluster14}{HTML}{5f8600}
+%% \definecolor{cluster15}{HTML}{4a2562}
+%% \definecolor{cluster16}{HTML}{8d6e0c}
+%% % corresponding text colors for cluster
+%% \definecolor{textplenary}{HTML}{ffffff}
+%% \definecolor{textsemiplenary}{HTML}{ffffff}
+%% %
+%% \definecolor{textcluster1}{HTML}{ffffff}
+%% \definecolor{textcluster2}{HTML}{ffffff}
+%% \definecolor{textcluster3}{HTML}{ffffff}
+%% \definecolor{textcluster4}{HTML}{ffffff}
+%% \definecolor{textcluster5}{HTML}{ffffff}
+%% \definecolor{textcluster6}{HTML}{ffffff}
+%% \definecolor{textcluster7}{HTML}{ffffff}
+%% \definecolor{textcluster8}{HTML}{ffffff}
+%% \definecolor{textcluster9}{HTML}{ffffff}
+%% \definecolor{textcluster10}{HTML}{ffffff}
+%% \definecolor{textcluster11}{HTML}{ffffff}
+%% \definecolor{textcluster12}{HTML}{ffffff}
+%% \definecolor{textcluster13}{HTML}{ffffff}
+%% \definecolor{textcluster14}{HTML}{ffffff}
+%% \definecolor{textcluster15}{HTML}{ffffff}
+%% \definecolor{textcluster16}{HTML}{ffffff}
+%% 
+%% % I set them to white to make it uniform
+%% \definecolor{textlogored}{HTML}{ffffff}
+%% \definecolor{textlogoorange}{HTML}{ffffff}
+%% 
+%% \definecolor{wiasblue}{rgb}{0.01171875, 0.36328125, 0.65625} % wiasblue
+%% %\definecolor{iccoptgray}{HTML}{343A40}
+%% \definecolor{iccoptgray}{HTML}{414141}
+
+
+\colorlet{main}{iccoptgray}
+\colorlet{textmain}{white}	% just for testing
+
+
+
+
+
+
+
+%% % are the following colors needed ????
+%% \definecolor{mosred}{rgb}{0.81176470588, 0.27450980392,0.23529411765}
+%% \definecolor{mosyellow}{rgb}{0.98823529412, 0.88235294118, 0.33725490196}
+%% \definecolor{mosyellowb}{rgb}{0.98823529412, 0.97254901961, 0.82745098039}
+%% \definecolor{mosredb}{rgb}{0.89411764706, 0.45098039216, 0.43529411765}
+%% \definecolor{mosorange}{rgb}{0.8671875, 0.44140625, 0.13671875}
+%% 
+%% \definecolor{logogreen}{RGB}{162,173,6}
+%% \definecolor{logored}{RGB}{207,70,60}
+%% \definecolor{logoyellow}{HTML}{e2a300}
+%% %\definecolor{logoorange}{RGB}{226,163,0}
+%% \definecolor{logoorange}{RGB}{222,113,35}
+%% \definecolor{logogray}{RGB}{206,206,206}
+%% 
+%% \definecolor{presentercolor}{rgb}{0.81176470588, 0.27450980392,0.23529411765} % mosred
+%% \definecolor{notregistered}{rgb}{0.81176470588, 0.27450980392,0.23529411765} % mosred
+%% \definecolor{shortcolor}{rgb}{0.8671875, 0.44140625, 0.13671875} % mosorange
+%% \definecolor{coauthorcolor}{rgb}{0, 0, 0} % black
+%% \definecolor{latecolor}{rgb}{0.01171875, 0.36328125, 0.65625} % wiasblue
+%% \definecolor{emptycolor}{rgb}{0.6328125, 0.67578125, 0.0234375} % green
+%% %\definecolor{contactcolor}{rgb}{0.6328125, 0.67578125, 0.0234375} % green
+%% \definecolor{contactcolor}{rgb}{0.81176470588, 0.27450980392,0.23529411765} % mosred
+
+
+\newlength\oldpaperwidth
+\newlength\oldpaperheight
+\setlength\oldpaperwidth\paperwidth
+\setlength\oldpaperheight\paperheight
+
+\newlength\cutoffborder		% amount that is cut off after the printing process
+\if@cutoffborders
+	\setlength\cutoffborder{3mm}
+\else
+	\setlength\cutoffborder{0mm}
+\fi
+
+\newlength\gap
+\newlength\bottomborder
+\newlength\topborder
+\newlength\outerborder
+\newlength\innerborder
+\newlength\page@columntitleheight
+\newlength\titletopborder
+
+										% before adding 3mm to every border
+\setlength\page@columntitleheight{17mm}	% 17mm | was 20mm
+\setlength\bottomborder{12mm}			% 12mm | 15mm
+\setlength\topborder{23mm}      		% 23mm | originally: 28mm
+\setlength\outerborder{15mm}			% 15mm | definitely not smaller than 13
+\setlength\innerborder{23mm}			% 23mm | not smaller than 20
+
+\setlength\columnsep{6mm}
+
+\setlength\gap{5mm}
+
+\setlength\titletopborder{70mm} 		% 70mm | originally 70mm
+
+\newcommand\chapterstyle[1]{\textcolor{main}{\Large #1}}
+\newcommand\sectionstyle[1]{\textcolor{main}{\Large #1}}
+\newcommand\subsectionstyle[1]{\textcolor{main}{\large #1}}
+\newcommand\paragraphstyle[1]{\textbf{\textcolor{main}{#1}}}
+\newcommand\subparagraphstyle[1]{\textbf{\textcolor{main}{#1}}}
+
+\newcommand\titlestyle[1]{\textcolor{main}{\Huge\MakeUppercase{#1}}}
+\newcommand\subtitlestyle[1]{\textcolor{main}{\Large{#1}}}
+\newcommand\durationstyle[1]{\textcolor{main}{\Large{#1}}}
+
+%\setlength\headheight{75mm}
+
+%\setlength\topborder\headheight
+%\addtolength\topborder{15mm}
+
+
+
+\geometry{paperwidth=\oldpaperwidth+2\cutoffborder, paperheight=\oldpaperheight+2\cutoffborder,
+left=\innerborder,
+right=\outerborder,
+top=\topborder,
+headsep=\page@columntitleheight,
+bottom=\bottomborder,
+layoutwidth=\oldpaperwidth,
+layoutheight=\oldpaperheight,
+layouthoffset=\cutoffborder,
+layoutvoffset=\cutoffborder,
+}
+
+
+
+
+%\if@cutoffborders%
+%	\RequirePackage[width=\the\oldpaperwidth, height=\the\oldpaperheight, center]{crop}
+%\fi
+% Will not influence papersize anymore, bit might be needed for other stuff
+\AtBeginDocument{%	
+\setlength\paperwidth\oldpaperwidth%
+\setlength\paperheight\oldpaperheight%
+}
+
+
+
+\newlength\stdGm@lmargin
+\newlength\stdGm@rmargin
+\newlength\stdGm@tmargin
+%\newlength\stdtextwidth
+%\newlength\stdcolumnwidth
+%\newlength\stdcolumnsep
+
+
+\setlength\stdGm@lmargin{\Gm@lmargin}
+\setlength\stdGm@rmargin{\Gm@rmargin}
+\setlength\stdGm@tmargin{\Gm@tmargin}
+%\setlength\stdtextwidth{\textwidth}
+%\setlength\stdcolumnwidth{\columnwidth}
+%\setlength\stdcolumnsep{\columnsep}
+
+
+
+
+
+
+\usepackage{fancyhdr} % Required for header and footer configuration
+\pagestyle{fancy} % Enable the custom headers and footers
+
+
+\RequirePackage{pgf}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{positioning}
+% #1 =  date
+% 
+%
+%
+%
+%
+%
+\newboolean{presiInSchSess}
+\newboolean{firstPresiInSchSess}
+\setboolean{presiInSchSess}{false}
+\setboolean{firstPresiInSchSess}{false}
+
+% In what follows, 
+% \begin{event}{1 day, time and room}{2 type or cluster shortcut}{3 clustercolor}{4 cluster text color}
+\newenvironment{event}[4]{%
+\pagebreak[0]%
+\noindent\begin{tikzpicture}%
+\fill[#3] (.5\pgflinewidth,0) coordinate (nw)
+				-- (\columnwidth-.5\pgflinewidth, 0) coordinate (ne)
+				-- (\columnwidth-.5\pgflinewidth, -1.1pt) coordinate (se)
+				-- (.5\pgflinewidth, -1.1pt) coordinate (sw)
+				-- cycle;
+\node[anchor = north west, fill = #3, draw=#3, text= #4, inner sep=0.2\baselineskip] at (nw) {#1};
+\node[anchor = south east, fill = #3, text= #4,inner sep = 0.2\baselineskip, draw = #3] at (se) {\color{#4}#2};
+\end{tikzpicture}%
+\par\nopagebreak\noindent%
+}{\bigskip\nopagebreak}
+
+
+\newcommand\ohevent[4]{%
+\noindent\begin{tikzpicture}%
+\fill[#3] (.5\pgflinewidth,0) coordinate (nw)
+				-- (\columnwidth-.5\pgflinewidth, 0) coordinate (ne)
+				-- (\columnwidth-.5\pgflinewidth, -1.1pt) coordinate (se)
+				-- (.5\pgflinewidth, -1.1pt) coordinate (sw)
+				-- cycle;
+\node[anchor = north west, fill = #3, draw=#3, text= #4, inner sep=0.2\baselineskip, align=left] at (nw) {#1};
+\node[anchor = south east, fill = #3, draw=#3, text= #4, inner sep=0.2\baselineskip, align=left] at (se) {#2};
+\end{tikzpicture}%
+\par\nopagebreak\noindent%
+}
+
+% 1 text, 2 page, 3 linktarget 4 id
+\newcommand\format@slot[4]{%
+\@firstschedsesstrue%
+\newpage\noindent%
+\begin{tikzpicture}[remember picture, overlay, transform shape, on background layer]
+  \node [anchor=north west, inner sep=0pt] at (current page.north west)
+    {\ifthenelse{\isodd{\thepage}}%
+    {%
+      \begin{tikzpicture}
+      \node at (0,0) {};
+      \node[anchor=south west] at (\stdGm@lmargin,-\stdGm@tmargin + \gap) {\parbox{\textwidth}{\hyperlink{#3}{\chapterstyle{#1}}\phantomsection\label{slot:#4}}};	% adjusting text width in tikz instead gives bad spaces between words
+      \end{tikzpicture}%
+    }{%
+      \begin{tikzpicture}
+      \node at (0,0) {};
+      \node[anchor=south west] at (\stdGm@rmargin,-\stdGm@tmargin + \gap) {\parbox{\textwidth}{\hyperlink{#3}{\chapterstyle{#1}}\phantomsection\label{slot:#4}}};% adjusting text width in tikz instead gives bad spaces between words
+      \end{tikzpicture}%
+    }};
+\end{tikzpicture}%
+\noindent%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% I know, that this part has issues
+%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\format@schedulesession[3]{%
+\if@firstschedsess%
+    \par%
+\else%
+    \par\smallskip%
+\fi%
+\@firsttalktrue%
+\noindent%
+%\colorbox{@currentcluster}{
+\hyperlink{#3}{\parbox{\textwidth-0.5\stdGm@rmargin}{\bf \textcolor{black}{\small #1, page #2}}}%\smallskip%
+}
+ 
+\newif\if@firsttalk\@firsttalktrue
+\newif\if@firstschedsess\@firstschedsesstrue
+ 
+\newcommand\format@talk[3]{%
+\noindent%
+\if@firsttalk%
+    \@firsttalkfalse%
+    \hyperlink{#3}{\small #1}%
+\else%
+    \hyperlink{#3}{\small #1}%
+\fi%
+}
+ 
+\def\restorecolumns{}%
+\AtBeginDocument{%
+\if@twocolumn%
+    \let\restorecolumns\twocolumn%
+\else%
+    \let\restorecolumns\onecolumn%
+\fi%
+}
+ 
+\def\makeoverview{%
+\onecolumn%
+\@starttoc{sch}%
+\restorecolumns%
+}
+ 
+
+ 
+ 
+\def\@slot{}
+ 
+\newcounter{nrslots}
+\setcounter{nrslots}{0} 
+ 
+\newcommand{\slot}[2]{%
+\addtolength{\catalog@itemshift}{\shiftfactor\catalog@itemlength}%
+\gdef\@slot{#1}%
+% set offset for the catolog item
+\chapter[Parallel Sessions Abstracts\:\: #1]{#1}%
+\label{slot:#2}
+%\addtocounter{day}{1}%
+
+%
+\ifnum\value{nrslots}>0
+\addtocontents{sch}{%
+\protect\end{tikzpicture}%
+}
+\fi
+
+
+\addtocontents{sch}{%
+\protect\format@slot{#1}{\thepage}{page.\thepage}{#2}%
+%\protect\contentsline{day}{#1}{\thepage}{page.\thepage}%
+}%
+
+
+%
+\addtocontents{sch}{%
+\protect\begin{tikzpicture}[remember picture, overlay]
+\protect\ifthenelse{\protect\isodd{\protect\thepage}}{%
+\protect\node (last) at ([xshift=\stdGm@lmargin,yshift=-\stdGm@tmargin]current page.north west) {};
+}{%
+\protect\node (last) at ([xshift=\stdGm@rmargin,yshift=-\stdGm@tmargin]current page.north west) {};
+}}
+%
+\addtocounter{nrslots}{1}
+\setcounter{nrschedsess}{0}
+\@firstschedsesstrue%
+\pagestyle{slot}%
+}
+
+% This make a chapter-like title and a nice pagestyle
+\newcommand{\slotOV}[2]{%
+% Caros pragmatic solution to make Wed.2 fit on one page 
+\ \\[-4em]\enlargethispage{3em}%
+\noindent\chapterstyle{#1}\phantomsection\label{slot:#2:overview}%
+\newline\noindent\newline\noindent% Obviously so many noindent means that I don't have a clear picture of what going on --xhub
+%
+}%
+
+
+
+\AtEndDocument{%
+	\ifnum\value{nrslots}>0%
+		\addtocontents{sch}{\protect\end{tikzpicture}}%
+	\fi%
+}
+
+
+
+
+%\def\@day{}
+%\newcommand{\day}[1]{%
+%\gdef\@day{#1}%
+%}
+
+
+ 
+\colorlet{@currentcluster}{main}
+\colorlet{text@currentcluster}{white}
+ 
+ 
+%\newcounter{nrspeakers}
+%\setcounter{nrspeakers}{0} 
+\newlength\talkshift
+\newlength\vtalkshift
+\setlength\talkshift{-0.33\textwidth}
+\setlength\vtalkshift{0pt}
+ 
+\newcounter{nrtalks}
+\setcounter{nrtalks}{0} 
+ 
+ 
+ 
+\def\include@talks{} 
+ 
+
+%\newcommand\poster[7]{%
+%				\presentation{#1}{#2}{#3}{#4}{#5}{#6}%
+%}
+
+% Be careful, this is going to define draftmode
+\@ifundefined{draftmode}{
+  \newcommand\mymarginpar[1]{}
+  \newcommand{\noinstitution}{}
+  \newcommand{\noaddress}{}
+}{
+%margin management
+  \setlength\marginparsep{7pt}
+  \setlength\marginparwidth{10pt}
+  \newcommand\mymarginpar[1]{\marginpar{\rotatebox[origin=cb]{90}{#1}}}
+  \newcommand{\noinstitution}{{\color{red}NO INSTITUTION!}}
+  \newcommand{\noaddress}{{\color{red}NO ADDRESS!}}
+ }
+
+% signature {color}{number}
+\newcommand{\nicenumber}[2]{%
+  \begin{tikzpicture}[baseline] \node[rectangle,fill=#1,minimum height=8pt,minimum width=2em,anchor=base] {\textcolor{white}{#2}};
+  \end{tikzpicture}
+}
+
+%for canceled talks
+\newcommand{\talkCancelled}{}
+\newcommand{\talkColor}{}
+\newcommand{\grayWhenCancelled}{black}
+
+\newcommand{\poster}[8]{%
+\ifx&#8&
+		\renewcommand{\talkCancelled}{}
+		\renewcommand{\talkColor}{logoorange}
+		\renewcommand{\grayWhenCancelled}{black}
+\else
+	\renewcommand{\talkCancelled}{[canceled]}
+		\renewcommand{\talkColor}{gray}
+		\renewcommand{\grayWhenCancelled}{gray}
+\fi
+
+\nopagebreak%
+\smallskip%%
+\noindent{{\nicenumber{\talkColor}{#7}}\raisetarget{talk:#1}{\textcolor{\talkColor}{\textbf{\talkCancelled}\ #2}}\phantomsection\label{talk:#1}}%
+\ifthenelse{\equal{#6}{}}{}{{\color{\grayWhenCancelled},\ #6}}\ {\color{\grayWhenCancelled}#3}\par\nopagebreak%
+\noindent\textcolor{\talkColor}{\bf #4}\par\nopagebreak\smallskip\nopagebreak%
+\indent {\color{\grayWhenCancelled}#5}\par%
+\medskip%
+\pagebreak[1]%
+}
+
+\newcommand\posterOverview[1]{%
+%\noindent\begin{tabular}{p{3.8cm}| p{13cm}}
+				#1
+%\end{tabular}
+}
+\newcommand\posterOverviewEntry[8]{%
+\ifx&#8&
+		\renewcommand{\talkCancelled}{}
+		\renewcommand{\talkColor}{logoorange}
+		\renewcommand{\grayWhenCancelled}{black}
+\else
+		\renewcommand{\talkCancelled}{\ [canceled]}
+		\renewcommand{\talkColor}{gray}
+		\renewcommand{\grayWhenCancelled}{gray}
+\fi
+				%\posterOverview{1 ID}{2 speaker}{3 co-authors}{4 title}{5 abstract}{6 affiliation}{7 ordering}
+%#2 & #4 \\[0.6em]
+				\noindent {\color{\talkColor}#2\talkCancelled\hfill #7}\\*
+				{\color{\grayWhenCancelled}#4}\\[1em]
+}
+
+
+\newcommand\@linkedtalk[7]{%
+	\presentation{#1}{#2}{#3}{#4}{#5}{#6}{#7}%
+%
+\addtocontents{sch}{%
+\protect\node[anchor=north west] (talk\thenrtalks\thenrschedsess) at ([xshift=\the\talkshift]last) {\protect\format@talk{#2}{\thepage}{talk:#1}};
+}
+%
+%
+\addtocounter{nrtalks}{1}
+\ifnum\value{nrtalks}>2%
+\setlength\talkshift{0pt}
+\setcounter{nrtalks}{0}
+\addtocontents{sch}{%
+\protect\node (last) at (talk0\thenrschedsess.south west) {};%
+}
+\else%
+\addtolength\talkshift{0.33\textwidth}%
+\fi
+}
+
+
+
+% STACKOVERFLOW
+\newcommand{\raisetarget}[2]% #1 = label, #2 = contents
+{\bgroup
+  \sbox0{#2}%
+  \raisebox{\ht0}{\hypertarget{#1}{}}\usebox0%
+\egroup}
+
+
+
+
+% \presentation{1 ID}{2 speaker}{3 co-authors}{4 title}{5 abstract}{6 affiliation}{7 cancelled}
+\newcommand{\presentation}[7]{%
+\ifx&#7&
+		\renewcommand{\talkCancelled}{}
+		\renewcommand{\talkColor}{@currentcluster}
+		\renewcommand{\grayWhenCancelled}{black}
+\else
+				\renewcommand{\talkCancelled}{[canceled]}
+		\renewcommand{\talkColor}{gray}
+		\renewcommand{\grayWhenCancelled}{gray}
+\fi
+\nopagebreak%
+\ifthenelse{\boolean{presiInSchSess}}{%
+\ifthenelse{\boolean{firstPresiInSchSess}}{%
+\medskip%
+}{%
+\smallskip%%
+}%
+}{%
+\smallskip%%
+}%
+\noindent{\raisetarget{talk:#1}{\textcolor{\talkColor}{#2}}\phantomsection\label{talk:#1}}%
+\ifthenelse{\equal{#6}{}}{}{\textcolor{\grayWhenCancelled}{,\ #6}}\ \textcolor{\grayWhenCancelled}{#3}\par\nopagebreak%
+\noindent\textcolor{\talkColor}{\bf #4 \talkCancelled}\par\nopagebreak\smallskip\nopagebreak%
+\mymarginpar{#1}%
+\indent {\color{\grayWhenCancelled}#5}\par%
+\medskip%
+\pagebreak[1]%
+\setboolean{firstPresiInSchSess}{false}
+}
+
+\newlength\wrapfiglen
+
+%\keypresentation{1 ID}{2 speaker}{3 photo}{4 title}{5 abstract}{6 affiliation}{7 chair}
+\newcommand{\keypresentation}[7]{%
+%\nopagebreak%
+%\smallskip%%
+\ \\[-0.8em]%Sorry for this dirty trick. But smallskip has issues here!
+\noindent{\hypertarget{talk:#1}{\textcolor{@currentcluster}{#2}}\phantomsection\label{talk:#1}}, #6\par\nopagebreak%
+\noindent\textcolor{@currentcluster}{\bfseries #4}\par\nopagebreak\smallskip\nopagebreak%
+\noindent Chair:\ #7\par\medskip\nopagebreak%
+\bgroup
+\setlength{\columnsep}{0.5em}%
+\setlength{\intextsep}{2pt}%
+\setlength\wrapfiglen{.169\textwidth}
+\addtolength\wrapfiglen{0.5em}
+\begin{wrapfigure}{r}{\wrapfiglen}
+  \centering
+  \raisebox{0pt}[\dimexpr\height-0.5\baselineskip\relax]{
+    \includegraphics[height=.225\textwidth,width=0.169\textwidth]{pics/portraits/#3.jpg}
+  }
+\end{wrapfigure}
+\mymarginpar{#1}%
+\indent #5\par%
+\egroup
+\medskip%
+%\pagebreak[1]%
+}
+
+%\talk{1 ID}{2 speaker}{3 co-authors}{4 title}{5 abstract}{6 affiliation}{7 cancelled}
+\newcommand{\talk}[7]{%
+				\presentation{#1}{#2}{#3}{#4}{#5}{#6}{#7}
+}%
+
+ 
+
+%\schedulesession{1 ID}{2 title}{3 chair}{4 talks}{5 organisers}{6 roominfo}{7 clustercolor}{8 clustershortcut}
+\newcommand\schedulesession[8]{%
+ % This next condition is just there to check for the proper plurial or singular form
+ % This piece of code leaves me very confused ... it is both nice and I have that weird feeling that looking at it
+ % it growing my eye cancer tumor --xhub
+ % No expandarg is for the accents
+ \saveexpandmode\noexpandarg
+ \IfSubStr{&#5&}{, }{ \def\org{Organizers} }{ \def\org{Organizer} }
+ \restoreexpandmode
+ \global\renewcommand{\talk}[7]{\@linkedtalk{##1}{##2}{##3}{##4}{##5}{##6}{##7}}%
+\setcounter{nrtalks}{0}
+\setlength{\talkshift}{0pt}%
+\addtocontents{sch}{%
+\protect\node[anchor=north west] (s\thenrschedsess) at (last) {\protect\format@schedulesession{#2}{\thepage}{schedulesession:#1}};
+\protect\node (last) at (s\thenrschedsess.south west) {};
+}
+\colorlet{@currentcluster}{#7}%
+\begin{event}{#1}{\raisetarget{schedulesession:#1}{#8}\phantomsection\label{schedulesession:#1} }{#7}{text#7}%
+\nopagebreak%
+\textcolor{#7}{\bf #2}\par\nopagebreak%
+\ifx&#5&
+%NOORGNAIZERS!!!!!!!!
+\else
+\noindent\org{}: \textcolor{#7}{#5}\par\nopagebreak%
+\fi
+\noindent Chair: \textcolor{#7}{#3}\par\nopagebreak%\newline
+%\ \\[-0.5em]\nopagebreak%
+%set firstPresentationInSchSession to tru
+\setboolean{presiInSchSess}{true}%
+\setboolean{firstPresiInSchSess}{true}%
+#4%
+\setboolean{presiInSchSess}{false}%
+\end{event}\newpage%%\pagebreak[0]%
+\colorlet{@currentcluster}{main}%
+
+\ifnum\value{nrtalks}<4
+\addtocontents{sch}{%
+\protect\node (last) at (talk0\thenrschedsess.south west) {};
+}
+\else
+\addtocontents{sch}{%
+\protect\node (last) at (talk3\thenrschedsess.south west) {};
+}
+\fi
+
+\addtocontents{sch}{%
+\protect\fill[fill=#7!25] (s\thenrschedsess.north west) rectangle ([xshift=-0.5\stdGm@rmargin]last.south west);
+\protect\node[anchor = south, color = black] at ($(s\thenrschedsess.north west)!0.5!(last.south west)$) [rotate=90]{#8};
+}
+\global\renewcommand{\talk}[7]{\presenter{##1}{##2}{##3}{##4}{##5}{##6}}%
+\addtocounter{nrschedsess}{1}
+}
+
+% %\schedulesession{1 ID}{2 title}{3 chair}{4 talks}{5 organisers}{6 roominfo}{7 clustercolor}{8 clustershortcut}
+% \newcommand\schedulesession[8]{%
+% \newpage
+% \global\renewcommand{\talk}[6]{\@linkedtalk{##1}{##2}{##3}{##4}{##5}{##6}}%
+% \setcounter{nrtalks}{0}
+% \setlength{\talkshift}{0pt}%
+% \colorlet{@currentcluster}{#7}%
+% \subsection*{\normalfont
+% \begin{event}{#1}{\raisetarget{schedulesession:#1}{#8}\phantomsection\label{schedulesession:#1} }{#7}{text#7}\nopagebreak%
+% \textcolor{#7}{\bf #2}\\[.5em]\nopagebreak%
+% \ifx&#5&
+% % NOORGNAIZERS!!!!!!!!
+% \else
+% Organizers: \textcolor{#7}{#5}\\[.5em]%
+% \fi
+% \nopagebreak%
+% Chair: \textcolor{#7}{#3}
+% \end{event}
+% }
+% #4%
+% %\colorlet{@currentcluster}{main}%
+% %\global\renewcommand{\talk}[6]{\presenter{##1}{##2}{##3}{##4}{##5}{##6}}%
+% %\addtocounter{nrschedsess}{1}
+% }
+
+
+\def\date@pln{}
+
+\newcommand\plenarydate[1]{%
+\gdef\date@pln{#1}%
+\chapter{#1}%
+}
+
+
+
+\def\@talk{}
+
+
+\newcounter{nrschedsess}
+\setcounter{nrschedsess}{0}
+
+
+
+
+\def\talkanchor{talk0}
+
+
+
+\newcommand\insert@clustertag[2]{%
+\ifthenelse{\isodd{\thepage}}{%
+\begin{tikzpicture}[remember picture]
+\fill[color = #1] (schedsess.north west) rectangle ([yshift=0.5\stdGm@rmargin]talkanchor.south west);
+\node[color = text#1, inner sep = 2pt, anchor = south] at (schedsess) {\bf #2};
+\end{tikzpicture}%
+}{%
+\begin{tikzpicture}
+\fill[color = #1] (0,0) rectangle (30pt,0.25\stdGm@rmargin);
+\node[color = text#1, inner sep = 2pt, anchor = south] at (15pt,0) {\bf #2};
+\end{tikzpicture}%
+}
+}
+
+% deprecated, but still supported
+% Sorry, commented those since I did my own
+%\newcommand\plenary[8]{\specialsession{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
+%\newcommand\semiplenary[8]{\specialsession{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
+
+
+%\specialsession{1 ID}{2 title}{3 chair}{4 talks}{5 organisers}{6 roominfo}{7 clustercolor}{8 clustershortcut}
+\newcommand\specialsession[8]{%
+				\global\renewcommand{\talk}[6]{\presentation{##1}{##2}{##3}{##4}{##5}{##6}{}}
+\setcounter{nrtalks}{0}
+\setlength{\talkshift}{0pt}%
+\setlength{\vtalkshift}{0pt}%
+\colorlet{@currentcluster}{#7}%
+\begin{event}{\@slot #6}{\raisetarget{schedulesession:#1}{#8}\phantomsection\label{schedulesession:#1}}{#7}{text#7}%
+\nopagebreak%
+%\label{#1} or \index{#1}  % If someone needs write an email
+\textcolor{#7}{\bf #2}\par\nopagebreak%
+\indent #5\par\nopagebreak%
+Chair: \textcolor{#7}{#3}\par\nopagebreak%\newline
+#4%
+\end{event}\pagebreak[0]%
+}
+
+%\plenary{1 ID}{2 chair}{3 talks}{4 roominfo}
+\newcommand\plenary[4]{%
+  \global\renewcommand{\talk}[6]{\keypresentation{##1}{##2}{##3}{##4}{##5}{##6}{#2}}%
+\colorlet{@currentcluster}{logored}%
+%\nopagebreak%
+\ohevent{\@slot #4}{\hypertarget{schedulesession:#1}{Plenary Talk}\phantomsection\label{schedulesession:#1}}{logored}{textlogored}%
+#3%
+%\pagebreak[0]%
+\colorlet{@currentcluster}{main}%
+\gdef\include@talks{}
+\newpage%
+}
+
+%\semiplenary{1 ID}{2 chair}{3 talk}{4 roominfo}
+\newcommand\semiplenary[4]{%
+  \global\renewcommand{\talk}[6]{\keypresentation{##1}{##2}{##3}{##4}{##5}{##6}{#2}}
+\colorlet{@currentcluster}{logoorange}%
+\ohevent{\@slot #4}{\hypertarget{schedulesession:#1}{Semi-Plenary Talk}\phantomsection\label{schedulesession:#1}}{logoorange}{textlogoorange}%
+#3%
+\colorlet{@currentcluster}{main}%
+\gdef\include@talks{}%
+\newpage
+}
+
+
+%\bestpaper{1 ID}{2 chair}{3 talk}{4 roominfo}
+\newcommand\bestpaper[4]{%
+				\global\renewcommand{\talk}[6]{\presentation{##1}{##2}{##3}{##4}{##5}{##6}{}}
+\colorlet{@currentcluster}{logored}%
+\ohevent{\@slot #4}{\hypertarget{schedulesession:#1}{Best Paper Session}\phantomsection\label{schedulesession:#1}}{logored}{textlogored}%
+Chair: \textcolor{logored}{#2}\par\medskip
+#3%
+\colorlet{@currentcluster}{main}%
+\gdef\include@talks{}%
+\newpage%
+}
+
+
+
+
+
+
+
+
+
+
+\renewcommand\tableofcontents{%
+\newpage\noindent%
+\make@columntitle{\contentsname}\noindent%
+\@starttoc{toc}%
+}
+
+\renewcommand\numberline[1]{%
+%
+}
+
+
+%\contentsline {1 <type>}{2 <text>}{3 <page>}{4 type.number}
+\def\contentsline#1#2#3#4{%
+%\protect\setlength\parindent{0pt}%
+  \ifx\\#4%
+	\noindent{#2}\dotfill{\flushright #3}%
+    \else
+      \ifHy@linktocpage
+      \noindent{#2}\dotfill {%
+        \hyper@linkstart{link}{\normalfont #4}{\normalfont #3}\hyper@linkend
+      }\newline%
+    \else%
+      \noindent%
+        \noindent\hyper@linkstart{link}{#4}{\normalfont #2}\hyper@linkend
+      \dotfill \makebox[\widthof{\phantom{#3}}]{#3}%
+    \fi
+  \fi
+  \par
+}
+
+
+%for REGISTER
+\newcommand{\slotStrBox}[1]{\makebox[2.75em][l]{#1}}
+%\newcommand{\insession}[2]{\item[\ ] \textit{#1} #2}
+\newcommand{\insession}[2]{\item[\ ] #1 #2}
+\newcommand{\involvement}[2]{#1:\pageref{#2}}
+\newcommand{\chair}[1]{\pageref{#1}{\color{gray}[c]}}
+\newcommand{\organiser}[1]{\pageref{#1}{\color{gray}[o]}}
+\newcommand{\coauthor}[1]{\textit{\pageref{#1}}}
+\newcommand{\posterpresenter}[1]{\textbf{\pageref{#1}}}
+\newcommand{\presenter}[2][]{\textbf{\pageref{#2}}#1}
+\newcommand{\personEntry}[5]{
+\ifx&#5&
+	\renewcommand{\talkCancelled}{}
+	\renewcommand{\grayWhenCancelled}{black}
+\else
+	\renewcommand{\talkCancelled}{\ [canceled]}
+	\renewcommand{\grayWhenCancelled}{gray}
+\fi
+	\noindent {\color{\grayWhenCancelled}{\bf #2, #1\talkCancelled},\ #3\begin{itemize}#4\end{itemize}}
+}
+%TODO: other style if it is plenary or semiplenary or other special thing.
+%- Posters?
+%talk-presenter: bold
+%poster-presenter: bold
+%co-author: normal [italic?]
+%do I need commas between the numbers? ->python
+
+
+
+
+
+
+
+
+\renewcommand\chapter{\clearpage%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+\renewcommand{\@makechapterhead}[1]{%
+\make@pagetitle{#1}%
+}
+
+\renewcommand{\@makeschapterhead}[1]{%
+\make@pagetitle{#1}%
+}
+
+
+\newcommand\make@columntitle[1]{%
+%\vbox{%
+\begin{tikzpicture}[remember picture, overlay, transform shape, on background layer]
+	\node [anchor=north west, inner sep=0pt] at (current page.north west){%
+    	\ifthenelse{\isodd{\thepage}}{%
+    	%	odd page
+    		\if@firstcolumn{%
+      			\begin{tikzpicture}
+      			\node at (0,0) {};
+      			\node[anchor=south west] at (\stdGm@lmargin,-\stdGm@tmargin + \gap) {\parbox{\columnwidth}{\sectionstyle{#1}}};	% adjusting text width in tikz instead gives bad spaces between words
+      			\end{tikzpicture}%
+    		}\else{%
+      			\begin{tikzpicture}
+      			\node at (0,0) {};
+      			\node[anchor=south west] at (\stdGm@lmargin+\columnwidth+\columnsep,-\stdGm@tmargin + \gap) {\parbox{\columnwidth}{\sectionstyle{#1}}};	% adjusting text width in tikz instead gives bad spaces between words
+      			\end{tikzpicture}%
+    		}\fi%
+    	}{%
+    		\if@firstcolumn{%
+      			\begin{tikzpicture}
+      			\node at (0,0) {};
+      			\node[anchor=south west] at (\stdGm@rmargin,-\stdGm@tmargin + \gap) {\parbox{\columnwidth}{\sectionstyle{#1}}};	% adjusting text width in tikz instead gives bad spaces between words
+      			\end{tikzpicture}%
+    		}\else{%
+      			\begin{tikzpicture}
+      			\node at (0,0) {};
+      			\node[anchor=south west] at (\stdGm@rmargin+\columnwidth+\columnsep,-\stdGm@tmargin + \gap) {\parbox{\columnwidth}{\sectionstyle{#1}}};	% adjusting text width in tikz instead gives bad spaces between words
+      			\end{tikzpicture}%
+    		}\fi%
+    	}%
+  	};%
+\end{tikzpicture}\ignorespaces%
+%}%
+%\vskip -\dbltextfloatsep
+}
+
+
+
+
+
+
+
+\newcommand\make@pagetitle[1]{%
+%\vbox{%
+\begin{tikzpicture}[remember picture, overlay, transform shape, on background layer]
+  \node [anchor=north west, inner sep=0pt] at (current page.north west)
+    { \ifthenelse{\isodd{\thepage}}%
+    {%
+      \begin{tikzpicture}
+      \node at (0,0) {};
+      %\fill[color = red] (\Gm@lmargin,-\Gm@tmargin+\headsep) rectangle (\Gm@lmargin+\columnwidth,-\Gm@tmargin);
+      %\fill[color = red] (\Gm@lmargin+\columnwidth+\columnsep,-\Gm@tmargin+\headsep) rectangle (\Gm@lmargin+\textwidth,-\Gm@tmargin);
+      \node[anchor=south west] at (\stdGm@lmargin,-\stdGm@tmargin + \gap) {\parbox{\textwidth}{\chapterstyle{#1}}};	% adjusting text width in tikz instead gives bad spaces between words
+      \end{tikzpicture}%
+    }{%
+      \begin{tikzpicture}
+      \node at (0,0) {};
+      %\fill[color = red] (\Gm@rmargin,-\Gm@tmargin+\headsep) rectangle (\Gm@rmargin+\columnwidth,-\Gm@tmargin);
+      %\fill[color = red] (\Gm@rmargin+\columnwidth+\columnsep,-\Gm@tmargin+\headsep) rectangle (\Gm@rmargin+\textwidth,-\Gm@tmargin);
+      \node[anchor=south west] at (\stdGm@rmargin,-\stdGm@tmargin + \gap) {\parbox{\textwidth}{\chapterstyle{#1}}};	% adjusting text width in tikz instead gives bad spaces between words
+      \end{tikzpicture}%
+    }};
+\end{tikzpicture}%
+%}%
+%\vskip -\dbltextfloatsep%
+}
+
+
+
+
+
+
+
+
+
+
+%\@startsection{1 name}{2 level}{3 indent}{4 beforeskip}
+%{5 afterskip}{6 style}*[7 alternative]{heding}
+
+
+
+%\renewcommand\section{\@startsection {section}{1}{\z@}%
+%                                   {\z@}%
+%                                   {\z@}%
+%                                   {\hphantom}}
+%\let\oldsection\section
+
+% self defined:
+%\def\@makechapterhead[#1]#2{}
+\def\section{\newpage\noindent%
+	\@ifnextchar[{\iccopt@section}{\siccopt@section}}
+	
+\def\iccopt@section[#1]#2{%
+\if@twocolumn%
+	\make@columntitle{#2}%
+\else%
+	\make@columntitle{#2}%
+\fi%
+\refstepcounter{section}%
+\csname sectionmark\endcsname{#1}%
+\addcontentsline{toc}{section}{\protect\numberline{\csname thesection\endcsname}#1}%
+\ignorespaces%
+}
+
+\def\sectionnotoc{\newpage\noindent%
+	\@ifnextchar[{\iccopt@section}{\siccopt@section}}
+	
+\def\iccopt@section[#1]#2{%
+\if@twocolumn%
+	\make@columntitle{#2}%
+\else%
+	\make@columntitle{#2}%
+\fi%
+\csname sectionmark\endcsname{#1}%
+\ignorespaces%
+}
+
+\def\siccopt@section#1{%
+\iccopt@section[#1]{#1}%
+%\make@columntitle{#1}%
+%\refstepcounter{section}%
+%\csname sectionmark\endcsname{#1}%
+%\addcontentsline{toc}{section}{\protect\numberline{\csname thesection\endcsname}#1}%
+}
+
+%\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+%                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+%                                     {\z@}%
+%                                     {\subsectionstyle}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\noindent\subsectionstyle}}                         
+
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                  	{\baselineskip}%
+                                    {-1em}%
+                                    {\bf\textcolor{main}}}
+                                    
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
+                                       {\z@}%
+                                       {-1em}%
+                                      {\bf\textcolor{main}}}
+                                    
+
+\newcommand{\wiassquare}{\tikz{\fill[rotate=15,iccoptgray] (0,0) rectangle (.2,.2);}}
+
+\RequirePackage{enumitem}
+\renewcommand{\labelitemi}{\wiassquare}
+%\setlist{nolistsep,topsep=0pt,leftmargin=\parindent}
+
+
+
+
+%\newcommand\hello{\@ifnextchar[{\@hellotwo}{\@hello}}
+%\def\@hellotwo[#1]#2{Hello #1 and #2}
+%\def\@hello#1{Hello #1}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of Headers and Footers 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\renewcommand{\chaptermark}[1]{\markboth{\normalsize\ #1}{}} % Styling for the current chapter in the header
+%\renewcommand{\sectionmark}[1]{\markboth{\sffamily\normalsize\bfseries\chaptername\ \thechapter.\ #1}{}} % Styling for the current section in the header
+
+\fancyhf{} % Clear default headers and footers
+
+
+%\setlength{\headheight}{80mm}
+
+
+% INFO: \leftmark contains the short chapter, \righmark the short section name
+
+\fancyhead[LE]{\textcolor{main}{\normalsize\thepage\quad \leftmark}} % Styling for the page number in the header
+\fancyhead[RO]{\textcolor{main}{\leftmark\quad \normalsize\thepage}}
+\renewcommand{\headrule}{}
+
+%\fancyhead[LO]{\rightmark} % Print the nearest section name on the left side of odd pages
+%\fancyhead[RE]{\leftmark} % Print the current chapter name on the right side of even pages
+%\fancyfoot[C]{\thepage} % Uncomment to include a footer
+
+%\renewcommand{\headrulewidth}{0.5pt} % Thickness of the rule under the header
+
+%\fancypagestyle{plain}{% Style for when a plain pagestyle is specified
+%	\fancyhead{}\renewcommand{\headrulewidth}{0pt}%
+%}
+
+
+
+\fancypagestyle{std}{% standard page style for first pages
+    \fancyhf{} % Clear default headers and footers
+	\fancyhead[LE]{\textcolor{main}{\normalsize\thepage\quad \leftmark}} % Styling for the page number in the header
+	\fancyhead[RO]{\textcolor{main}{\normalsize\leftmark\quad \thepage}}
+	\renewcommand{\headrule}{}%
+}
+
+\fancypagestyle{registerstyle}{% standard page style for first pages
+    \fancyhf{} % Clear default headers and footers
+	\fancyhead[LE]{\textcolor{main}{\normalsize\thepage\quad \leftmark}} % Styling for the page number in the header
+	\fancyhead[RO]{\textcolor{main}{\normalsize\leftmark\quad \thepage}}
+	%\cfoot{{\color{gray}[c]}=session chair, {\color{gray}[o]}=session organiser, \textbf{bold}=presenter (with starting time), \textit{italic}=co-author}
+	\renewcommand{\headrule}{}%
+}
+
+
+\fancypagestyle{title}{% standard page style for first pages
+    \fancyhf{} % Clear default headers and footers
+	\fancyhead[LE]{\textcolor{main}{\normalsize\thepage\quad \leftmark}} % Styling for the page number in the header
+	\fancyhead[RO]{\textcolor{main}{\normalsize\leftmark\quad \thepage}}
+	\renewcommand{\headrule}{}%
+}
+
+\fancypagestyle{onlypagenumber}{% standard page style for first pages
+    \fancyhf{} % Clear default headers and footers
+	\fancyhead[LE]{\textcolor{main}{\normalsize\thepage}} % Styling for the page number in the header
+	\fancyhead[RO]{\textcolor{main}{\normalsize\thepage}}
+	\renewcommand{\headrule}{}%
+}
+
+
+\newlength\catalog@itemlength
+\newlength\catalog@itemshift
+\setlength\catalog@itemlength{0.143\oldpaperheight}
+\setlength\catalog@itemshift{-0.5\catalog@itemlength}
+\def\shiftfactor{0.5}
+\def\insertslot@title{}
+
+\def\catalog@item{%
+\ifthenelse{\isodd{\thepage}}{%
+\begin{tikzpicture}[rotate = 90]
+\fill[color = main] (0,-2\cutoffborder) rectangle (\catalog@itemlength, 0.5\stdGm@rmargin);
+\node[color = white, inner sep = 0pt, anchor = center] at (0.5\catalog@itemlength, 0.25\stdGm@rmargin) {\bf \@slot\ };
+\end{tikzpicture}%
+}{%
+\begin{tikzpicture}[rotate = -90]
+\fill[color = main] (0,-2\cutoffborder) rectangle (\catalog@itemlength, 0.5\stdGm@rmargin);
+\node[color = white, inner sep = 0pt, anchor = center] at (0.5\catalog@itemlength, 0.25\stdGm@rmargin) {\bf \@slot\ };
+\end{tikzpicture}%
+}
+}
+
+\fancypagestyle{slot}{% standard page style for first pages
+    \fancyhf{} % Clear default headers and footers
+	\fancyhead[LE]{\textcolor{main}{\bf\normalsize\thepage\quad \leftmark}%
+	\begin{tikzpicture}[remember picture, overlay, transform shape]
+	\node[anchor=north west, inner sep = 0pt] at ([yshift=-\catalog@itemshift, xshift=-2\cutoffborder]current page.north west) {\catalog@item};
+	\end{tikzpicture}%
+	} % Styling for the page number in the header
+	\fancyhead[RO]{\textcolor{main}{\bf\normalsize\leftmark\quad \thepage}%
+	\begin{tikzpicture}[remember picture, overlay, transform shape]
+	\node[anchor=north east, inner sep = 0pt] at ([yshift=-\catalog@itemshift, xshift=2\cutoffborder]current page.north east) {\catalog@item};
+	\end{tikzpicture}%
+	}
+	\renewcommand{\headrule}{}%
+}
+
+
+
+
+% Removes the header from odd empty pages at the end of chapters
+\renewcommand{\cleardoublepage}{
+\clearpage\ifodd\c@page\else%
+\hbox{}%
+\vspace*{\fill}%
+\thispagestyle{empty}%
+\newpage%
+\fi}
+
+
+
+
+\def\inserttitle{}
+\def\insertsubtitle{}
+\def\insertduration{}
+\renewcommand{\title}[1]{\gdef\inserttitle{#1}}
+\newcommand{\subtitle}[1]{\gdef\insertsubtitle{#1}}
+\newcommand{\duration}[1]{\gdef\insertduration{#1}}
+
+
+
+
+
+
+
+
+
+
+
+
+\def\adjustpagenodes{%
+\makeatletter%
+\begin{tikzpicture}[remember picture, overlay, on background layer]
+\node (newcenter) at ([xshift=\Gm@layouthoffset,yshift=\Gm@layoutvoffset]current page) {};
+\node[inner sep = 0] (current page) at (newcenter) {%
+	\begin{tikzpicture}	% might cause problems
+ 		\node at (-0.5\paperwidth,-0.5\paperheight) {};
+ 		\node at ( 0.5\paperwidth,-0.5\paperheight) {};
+ 		\node at ( 0.5\paperwidth, 0.5\paperheight) {};
+ 		\node at (-0.5\paperwidth, 0.5\paperheight) {};
+ 	\end{tikzpicture}%
+};
+\end{tikzpicture}%
+\makeatother%
+}
+
+
+
+
+
+
+
+
+
+
+
+
+\def\cover{% cover of the book
+\thispagestyle{empty}%
+\newgeometry{paperwidth=\oldpaperwidth+2\cutoffborder,
+paperheight=\oldpaperheight+2\cutoffborder,
+left=\innerborder,
+right=\outerborder,
+top=\titletopborder,
+headsep=60mm,%\page@columntitleheight,
+bottom=\bottomborder,
+layoutwidth=\oldpaperwidth,
+layoutheight=\oldpaperheight,
+layouthoffset=\cutoffborder,
+layoutvoffset=\cutoffborder,
+}%
+\setlength\paperwidth\oldpaperwidth%	do not delete me
+\setlength\paperheight\oldpaperheight%	do not delete me either
+
+\newcommand{\latestversionlink}{
+\begin{tikzpicture}[remember picture]
+      \fill[logogreen] ([xshift=-.33\paperwidth]0,0)--([xshift=-.18\paperwidth]0,0)--([yshift=-.18\paperwidth]0,0)--([yshift=-.33\paperwidth]0,0);
+    \node[text width=8cm, rotate=-45, text centered] at ([xshift=-5.5\gap,yshift=-5.5\gap]0,0) {
+       \textbf{Download the latest version of this book at
+      \url{https://iccopt2019.berlin/conference_book}}
+    };
+\end{tikzpicture}
+}
+
+\begin{titlepage}%
+\adjustpagenodes%	DO NOT DELETE! THE REST DEPENDS ON IT!
+\begin{tikzpicture}[remember picture, overlay, transform shape, on background layer]
+%\node[anchor=north west, rounded corners, fill=logoyellow, text width=.42\textwidth, inner sep=.5cm] at ([yshift=-5\gap,xshift=3\gap]logo.south) {
+%      Download the latest version of this book at
+%      \qrlink{https://iccopt2019.berlin/conference_book}{pics/qr/conferencebook.pdf}
+%      Link to the conference web page at
+%      \qrlink{https://iccopt2019.berlin}{qr-code.pdf}
+%};
+    \node at (current page) {\includegraphics{pics/Titelseite_A4.pdf}};
+
+\node[anchor=south, inner sep = 0pt] at ([yshift=\gap]current page.south) {%
+%\resizebox{!}{0.05\paperheight}{%
+\parbox{\paperwidth}{%
+\hfill%
+\includegraphics[height = 0.06\paperheight]{logo_MOS.pdf}\hfill%
+\includegraphics[height = 0.06\paperheight]{Logo_TU_Berlin.pdf}\hfill%
+\raisebox{-1\gap}{\includegraphics[height = 0.08\paperheight]{wiaslogo-2010-en.pdf}}\hfill%
+{}
+}%
+%}%
+};
+\node[] at (15.2,4.1) {
+\href{https://iccopt2019.berlin/conference_book}{\latestversionlink}
+};
+\end{tikzpicture}
+
+\end{titlepage}
+\restoregeometry
+\onecolumn% creates clear page
+\thispagestyle{empty}%
+\vfill%
+	\paragraphstyle{\boa{} --- Version 1.0}\par
+	Sixth International Conference on Continuous Optimization\par
+	Berlin, Germany, August 5--8, 2019\par
+	Michael Hinterm\"uller (Chair of the Organizing Committee)\par
+	Weierstrass Institute for Applied Analysis and Stochastics (WIAS)\par
+	Mohrenstra\ss{}e 39, 10117 Berlin\par
+	\copyright~July 16, 2019, WIAS, Berlin\par
+	Layout: Rafael Arndt, Olivier Huber, Caroline L\"obhard, Steven-Marian Stengl\par
+	Print: FLYERALARM GmbH\\[1em]
+	\indent\paragraphstyle{Picture Credits}\par
+	page~\pageref{talk:33312}, Michael Ulbrich: Sebastian Garreis\\
+	\indent page~\pageref{sec:conferencedinner}, ``MS Mark Brandenburg'': Stern und Kreisschiffahrt GmbH\\[1em]
+%	\indent\paragraphstyle{Map Credits}\par
+%	Inside-back cover: \copyright~OpenStreetMap~(\url{http://openstreetmap.org}) contributors, with the following licenses:
+%	\begin{itemize}
+%	 \item data: under the ODbL license (\url{https://opendatacommons.org/licenses/odbl/});
+%	 \item map tiles: under the CC BY-SA license (\url{https://creativecommons.org/licenses/by-sa/2.0/}).
+%	\end{itemize}
+\restorecolumns\noindent%
+}
+
+
+
+\renewcommand\maketitle{%
+\thispagestyle{empty}%
+\newgeometry{paperwidth=\oldpaperwidth+2\cutoffborder,
+paperheight=\oldpaperheight+2\cutoffborder,
+left=\innerborder,
+right=\outerborder,
+top=\titletopborder,
+headsep=60mm,%\page@columntitleheight,
+bottom=\bottomborder,
+layoutwidth=\oldpaperwidth,
+layoutheight=\oldpaperheight,
+layouthoffset=\cutoffborder,
+layoutvoffset=\cutoffborder,
+}%
+% material for this page here
+\begin{tikzpicture}[remember picture, overlay, transform shape, on background layer]
+  %\fill[gray!20, very thick] ([yshift=-5cm]current page.north west)--([yshift=-6.5cm]current page.north east)--(current page.north east)--(current page.north west);
+  % complete overkill
+    \fill[gray!20, very thick] ([xshift=-\paperwidth,yshift=-4.5cm]current page.north west)--([xshift=\paperwidth,yshift=-8cm]current page.north east)--([xshift=\paperwidth, yshift=2\cutoffborder]current page.north east)--([xshift=-\paperwidth,yshift=\cutoffborder]current page.north west);
+  \node [anchor=north west, inner sep=0pt] at ([yshift=1cm]current page.north west)
+    { \ifthenelse{\isodd{\thepage}}%
+    {%
+      \begin{tikzpicture}
+      \node at (0,0) {};
+      \node[anchor=south west] at (\Gm@lmargin,-\Gm@tmargin + \gap) {%
+      \parbox{\textwidth}{%
+      	\flushright\noindent%
+      	\resizebox{0.8\textwidth}{!}{%
+      		\titlestyle{\inserttitle}}\\[\gap]\noindent%
+      	\resizebox{0.8\textwidth}{!}{%
+      		\subtitlestyle{\insertsubtitle}}\\[0.5\gap]%
+      	\resizebox{\columnwidth}{!}{%
+      		\durationstyle{\insertduration}}}};	% adjusting text width in tikz instead gives bad spaces between words
+      \end{tikzpicture}%
+    }{%
+      \begin{tikzpicture}
+      \node at (0,0) {};
+      %\fill[color = red] (\Gm@rmargin,-\Gm@tmargin+\headsep) rectangle (\Gm@rmargin+\columnwidth,-\Gm@tmargin);
+      %\fill[color = red] (\Gm@rmargin+\columnwidth+\columnsep,-\Gm@tmargin+\headsep) rectangle (\Gm@rmargin+\textwidth,-\Gm@tmargin);
+      \node[anchor=south west] at (\Gm@rmargin,-\Gm@tmargin + \gap) {%
+      \parbox{\textwidth}{%
+      	\flushright\noindent%
+      	\resizebox{0.8\textwidth}{!}{%
+      		\titlestyle{\inserttitle}}\\[\gap]\noindent%
+      	\resizebox{0.8\textwidth}{!}{%
+      	\subtitlestyle{\insertsubtitle}}\\[0.5\gap]%
+      	\resizebox{\columnwidth}{!}{%
+      		\durationstyle{\insertduration}}}};	% adjusting text width in tikz instead gives bad spaces between words
+      \end{tikzpicture}%
+    }};
+\end{tikzpicture}%
+\noindent\hspace*{-\parindent}% 	best I could do
+\inputIfExists{first_page.tex}%
+\clearpage%
+\restoregeometry%
+\setlength\paperwidth\oldpaperwidth%
+\setlength\paperheight\oldpaperheight%
+}
+
+
+
+
+
+\def\blurb{% backside of the book
+\cleardoublepage%
+\begin{tikzpicture}[remember picture,overlay]
+\fill[color = iccoptgray] ([xshift=-2\cutoffborder,yshift=2\cutoffborder]current page.north west) rectangle ([xshift=2\cutoffborder,yshift=-2\cutoffborder]current page.south east);
+\node[anchor = center,inner sep=0pt] at (current page.center) {\includegraphics[width = 0.3\textwidth]{qr-code.pdf}};
+\node[anchor = center,inner sep=0pt, color = white] at ([yshift=-0.15\textwidth-1.2\gap]current page.center) {\resizebox{0.3\textwidth}{!}{\bf \Large iccopt2019.berlin}};
+\node[anchor=south, inner sep = 0pt] at ([yshift=\gap]current page.south) {%
+%\resizebox{!}{0.05\paperheight}{%
+\parbox{\paperwidth}{%
+\hfill%
+\includegraphics[height = 0.05\paperheight]{logo_MOS.pdf}\hfill%
+\includegraphics[height = 0.05\paperheight]{Logo_TU_Berlin.pdf}\hfill%
+\includegraphics[height = 0.05\paperheight]{wiaslogo-2010-en.pdf}\hfill%
+{}
+}%
+%}%
+};
+\end{tikzpicture}
+%\begin{minipage}[c]{\textwidth}%
+%\includegraphics[width = \textwidth]{qr-code.pdf}
+%\end{minipage}
+
+}
+
+
+
+%for the parallel sessions overview:
+
+
+% This has been tune to fit the page information. Revert to .3 is this is deleted
+\newcommand{\talkOV}[7]{
+	\parbox[t]{.273\textwidth}{
+		\ifx&#7&
+			\small #2
+		\else
+						\textcolor{gray}{\small #2 [canceled]}
+		\fi
+	}
+}
+\newcommand{\labelSchedulesession}[1]{\phantomsection\label{schedulesession:#1:overview}}
+\newcommand{\labelSessionslot}[1]{}
+
+\newcommand{\singletalk}[4]{\item[#1] #2 \emph{#3}, Abstract \#char.:~#4}
+%\newcommand{\poster}[4]{\item[#1] #2 \emph{#3}, Abstract \#char.:~#4}
+% command session: #2 contains submitter
+\newcommand{\session}[5]{\item[#1] #3 \emph{#4} \ifthenelse{\isempty{#5}}{\ \\\textcolor{emptycolor}{Talks to be submitted}}{
+\begin{itemize}
+#5
+\end{itemize}
+}
+}
+
+%\schedulesessionOV{1 ID}{2 title}{3 chair}{4 talks}{5 organisers string}{6 roominfo}{7 clustercolor}{8 clustershortcut}
+\newcommand{\schedulesessionOV}[8]{%
+\tikz{
+\node[] (info) {
+\parbox[t]{.95\textwidth}{
+%\setlength{\parindent}{1em}
+\labelSchedulesession{#1}
+%\tikz{\node[text#7, fill=#7] (ID) {#1};} 
+\ifx&#5&
+#1 \textbf{#2}\\%, Chair: #3\\
+\else
+#1 \textbf{#2}, {\small #5}\\%, Chair: #3\\
+\fi
+#4\hfill\ page~\pageref{schedulesession:#1}}
+};
+\fill[#7] (info.north west)--([xshift=-.5em]info.north west)--([xshift=-.5em]info.south west)--(info.south west)-- cycle;
+%\node[below right] at (info.north east) {\parbox{2cm}{#6\\#3}};
+\draw[thick,#7] (info.south east)--([xshift=-.5em]info.south west);
+}
+}
+
+
+\newlength\@tmplen%
+% \@fit{1 Text}{2 maximal size}
+\def\@fit#1#2{%
+\setlength\@tmplen{\widthof{#2}}%
+	\ifdim\@tmplen>#1%
+		\resizebox{#1}{!}{#2}%
+	\else%
+		#2%
+	\fi%
+}
+
+
+%chairlist
+%%in case numbers are wanted:
+%\newcount\mycount
+\newcommand{\nicechair}[4]{%
+				%\noindent {\color{#1}#2}\\
+				\noindent {\color{cluster#1}\@fit{.435\textwidth}{#2}}\\[-1.5em]%
+				%\hfill\nicenumber{cluster#1}{#3}
+	\tikz{%
+		\node[] (info) {
+		\parbox[t]{.46\textwidth}{
+		%talks	
+		#4
+		\hfill}
+		};
+		\fill[cluster#1] (info.north west)--([xshift=-.5em]info.north west)--([xshift=-.5em]info.south west)--(info.south west)-- cycle;
+		%\node[below right] at (info.north east) {\parbox{2cm}{#6\\#3}};
+		\draw[thick, cluster#1] (info.north east)--([xshift=-.5em]info.north west);
+
+		%%If you want numbers instead of shortcuts:
+		%\fill[cluster#1] (info.north east) rectangle ([xshift=-1.8em, yshift=1.5em]info.north east);
+		%\mycount #1\relax
+		%\advance\mycount -1\relax
+		%\node[white] at ([xshift=-0.9em, yshift=0.75em]info.north east) {\the\mycount};
+
+		\fill[cluster#1] (info.north east) rectangle ([xshift=-2.2em, yshift=1.5em]info.north east);
+		\node[white] at ([xshift=-1.1em, yshift=0.75em]info.north east) {#3};
+	}%
+}
+
+\newcommand{\scboxwidth}{2.65em}
+\newcommand{\separatorheight}{0.1em}
+\newcommand{\polewidth}{0.5em}
+\newcommand{\headspace}{0.05em}
+\newcommand{\footspace}{0.05em}
+\newcommand{\raiseheading}{0.26em}
+\newcommand{\scminwidth}{2.2em}
+
+%for debugging
+%\newdimen\XCoord
+%\newdimen\YCoord
+
+\renewcommand{\nicechair}[4]{%
+\noindent\begin{tikzpicture}
+	\tikzset{scbox/.style={text=white, rectangle, minimum width={\scminwidth}, inner xsep=0.0em, anchor=base east}}
+	\tikzset{clustertitle/.style={anchor=base west, inner xsep=0.2em}}
+	\tikzset{organizers/.style={anchor=north west}}
+	
+	\coordinate (origin) at (0,0);
+	
+	\node[organizers] (orga) at ($(origin) + (\polewidth, -\separatorheight-\headspace)$) {\parbox{0.7\columnwidth}{#4}};
+	
+	\fill[cluster#1] (0,0)
+		-- (\columnwidth, 0) coordinate (rightside)
+		-- ++(0, -\separatorheight) coordinate (separatorbottomright)
+		-- (\polewidth, -\separatorheight)
+		-- ($(orga.south west) + (0, -\footspace)$)
+		-- ++(-\polewidth, 0)
+		-- cycle;
+	\node[scbox, draw=cluster#1, fill=cluster#1] (shortcut) at ([yshift=\raiseheading]rightside) {#3};
+	\node[clustertitle, color=cluster#1] at ([yshift=\raiseheading, xshift=-0.23em]origin) {\@fit{.435\textwidth}{#2}};
+	%\draw[red] (rightside) -- ++(-\scminwidth-\pgflinewidth, 0);
+	%%debug
+	%\path (0,0) -- (rightside);
+	%\pgfgetlastxy{\XCoord}{\YCoord};
+	%\node[cyan] at (0,0.0em) {\the\YCoord};
+	%\path (0,0) -- (shortcut.south east);
+	%\pgfgetlastxy{\XCoord}{\YCoord};
+	%\node[cyan] at (0,0.8em) {\the\YCoord};
+	%\path (0,0) -- (separatorbottomright);
+	%\pgfgetlastxy{\XCoord}{\YCoord};
+	%\node[cyan] at (0,1.6em) {\the\YCoord};
+\end{tikzpicture}
+\par\vfill
+}
+
+\newcommand{\achair}[1]{\parbox[t][1.1em][b]{.43\textwidth}{\@fit{.455\textwidth}{#1}}}
+
+\newcommand{\qrlink}[2]{
+\begin{center}
+\url{#1}
+\begin{figure}[H]
+  \centering
+  \href{#1}{\includegraphics[width=0.33\columnwidth]{#2}}%
+\end{figure}
+\end{center}
+}

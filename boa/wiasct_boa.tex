@@ -1,0 +1,106 @@
+% To be enabled very soon! 
+% read https://tex.stackexchange.com/questions/516/does-it-matter-if-i-use-textit-or-it-bfseries-or-bf-etc or l2tabu if you are not convinced
+%\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[a4paper,twoside,twocolumn,9pt]{extbook}
+
+\usepackage{underconstruction}
+
+\usepackage{generated_config}
+
+\usepackage[]{iccopt2019}
+\usepackage{lipsum}
+\usepackage{float}
+%\usepackage{showframe}
+\usepackage{rerunfilecheck}
+
+
+
+\title{ICCOPT 2019}
+\subtitle{\ Sixth International Conference on Continuous Optimization}
+\duration{Berlin, Germany, August 5--8, 2019}
+\author{Iccopt Group}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\begin{document}
+\brokenPiece[cover needs pdf-placeholders]{
+\cover%
+}
+\maketitle%
+\chapter[Sponsors]{The ICCOPT 2019 is Supported by}%
+\inputIfExists{sponsors}	% sponsors and exhibitors
+\tableofcontents
+\vfill
+\brokenPiece[qr-codes need pdf-placeholders]{
+\begin{center}
+  \tikz{
+    \node[rounded corners, fill=logogray, text width=.42\textwidth, inner sep=.5cm] {
+        Download the conference app at
+      \qrlink{https://iccopt2019.berlin/app}{pics/qr/iccopt2019app.pdf}
+      Download the online version of this book at
+      \qrlink{https://iccopt2019.berlin/conference_book}{pics/qr/conferencebook.pdf}
+}; 
+  }
+\end{center}
+}
+\vfill
+\section{Overview of Events}%\noindent%
+\inputIfExists{overview_of_events}
+\inputIfExists{maps}
+\chapter{General Information}\label{general_information}
+\inputIfExists{general}
+\chapter{Social Program/City Tours}
+\inputIfExists{socialprogram}
+\section{Speaker and Chair Information}
+\thispagestyle{onlypagenumber}%
+\inputIfExists{speakerandchairinformation}
+\section{List of Clusters and Cluster Chairs}%
+\inputIfExists{CLUSTERCHAIRS}
+\onecolumn%
+\chapter{Program Overview}%
+\brokenPiece[I don't know why this part does not work]{
+\hspace{-1em}\begin{tikzpicture}[scale=1.59]
+%\hspace{-1em}\begin{tikzpicture}[scale=1.59, background rectangle/.style={fill=black!75}, show background rectangle]
+\inputIfExists{program_overview.tex}
+%\inputIfExists{program_overview_dark.tex}
+\end{tikzpicture}
+}
+\restorecolumns
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Special Events}
+%\markboth{Special Events}{Special Events}
+\chapter{Special Events}\label{plenaries_semiplenaries}
+\inputIfExists{special_events.tex}
+%\makeoverview
+\clearpage
+\chapter{Exhibition}%
+\inputIfExists{exhibitors}
+\sectionnotoc{FBP 2020}
+\inputIfExists{fbp}
+\chapter{Posters Overview}\label{session:posters}
+\posterOverview{\inputIfExists{POSTERS_OVERVIEW}}
+\chapter{Posters Abstracts}\label{session:postersabstracts}
+\inputIfExists{POSTERS}
+\newpage
+\onecolumn%this is a dirty trick to enforce the page brake. How do you do that properly?
+\newpage
+\inputIfExists{dinner}
+\newpage
+\chapter{Parallel Sessions Overview}\label{parallel_sessions_overview}%
+\ \\[4em]% an artefact of the \\[-4em] in the \slotOV makro to fit Wed.2 on one page
+\inputIfExists{SCHEDULE_SESSIONS_OVERVIEW.tex}
+\restorecolumns%
+\inputIfExists{SCHEDULE_SESSIONS.tex}
+\pagestyle{registerstyle}%
+\cleardoublepage%
+\chapter{Index of Authors}\setlist{nolistsep,topsep=0pt,leftmargin=\parindent}
+\noindent%
+\makebox[3.8em][r]{\textbf{bold}}			: presenter (with starting time)\\
+\makebox[3.8em][r]{\textit{italic}}		: co-author\\
+\makebox[3.8em][r]{{\color{gray}[c]}}	: session chair\\
+\makebox[3.8em][r]{{\color{gray}[o]}}	: session organiser\\
+
+\inputIfExists{REGISTER.tex}
+%\blurb
+\listoftodos
+\end{document}

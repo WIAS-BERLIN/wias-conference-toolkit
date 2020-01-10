@@ -1,0 +1,16 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{underconstruction}[package which helps to keep an overview over all the missing and broken parts]
+
+\RequirePackage{todonotes}
+\RequirePackage{tcolorbox}
+\newcommand{\brokenPiece}[2][]{
+	\todo[inline]{#1}
+}
+
+\newcommand{\inputIfExists}[2][]{
+	\IfFileExists{#2}{
+		\input{#2}
+	}{
+	\todo[inline]{missing file \ensuremath{#2}} %ensuremath was the only thing that did not produce errors, however might look weird
+	}
+}
