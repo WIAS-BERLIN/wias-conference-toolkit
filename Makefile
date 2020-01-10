@@ -53,25 +53,22 @@ participation_letters: participation_letters/participation-letters.tex letters/s
 upload: letters csv summer_school/nametags.pdf vouchers dinner_refund.csv
 	curl -u $(USER) -T "{$(shell echo letters/*letter*.pdf TUBS_ICCOPT2019*.csv summer_school/nametags.pdf vouchers/vouchers-dinner.pdf | tr ' ' ',')}" https://cloud.wias-berlin.de/aotearoa/remote.php/webdav/ICCOPT2019-documents/ -sw '%{http_code}'
 
-boa/ICCOPT2019_Conference_Book.pdf: xml/db.xml tex
-	cd boa; pdflatex ICCOPT2019_boa.tex
-	cd boa; pdflatex ICCOPT2019_boa.tex
-	cd boa; pdflatex ICCOPT2019_boa.tex
-	cd boa; cp ICCOPT2019_boa.pdf ICCOPT2019_Conference_Book.pdf
+conference-book/Conference_Book.pdf: xml/db.xml tex
+	cd conference-book; pdflatex wiasct-book.tex
+	cd conference-book; pdflatex wiasct-book.tex
+	cd conference-book; pdflatex wiasct-book.tex
+	cd conference-book; cp wiasct-book.pdf Conference_Book.pdf
 
-pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf:
-	$(PYTHON) export_first_draft.py
+parallel-sessions-overview/Parallel_sessions_overview.pdf:
+	cd parallel-sessions-overview; $(PYTHON) build_parallel_sessions_overview.py
+	cd parallel-sessions-overview; pdflatex Parallel_sessions_overview.tex
+	cd parallel-sessions-overview; pdflatex Parallel_sessions_overview.tex
 
-update-schedule: xml/db.xml boa/ICCOPT2019_Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf xml/schedule.xml webapp
-	scp boa/ICCOPT2019_Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf xml/schedule.xml iccopt2019@spp1962.wias-berlin.de:/srv/www/vhosts/iccopt2019.berlin/downloads/
+update-schedule: xml/db.xml conference-book/ICCOPT2019_Conference_Book.pdf parallel-sessions-overview/Parallel_sessions_overview.pdf xml/schedule.xml webapp
+	scp conference-book/ICCOPT2019_Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf xml/schedule.xml iccopt2019@spp1962.wias-berlin.de:/srv/www/vhosts/iccopt2019.berlin/downloads/
 	rsync -v -e ssh webapp/website/ iccopt2019@spp1962.wias-berlin.de:/srv/www/vhosts/iccopt2019.berlin/conference_app
-
-webapp/website/slots/Mon_1.html: xml/db.xml webapp/templates/*
-	$(PYTHON) export_webapp.py
-
-webapp: webapp/website/slots/Mon_1.html
 
 pwa: xml/db.xml
 	cd progressive_web_app; $(PYTHON) build_pwa.py
 
-all: app-general/schedule.xml tex csv vouchers letters summer_school/nametags.pdf boa/ICCOPT2019_Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf
+all: app-general/schedule.xml tex csv vouchers letters summer_school/nametags.pdf conference-book/ICCOPT2019_Conference_Book.pdf parallel-sessions-overview/Parallel_sessions_overview.pdf
