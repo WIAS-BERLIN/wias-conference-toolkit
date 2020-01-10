@@ -38,16 +38,13 @@ badges/badges.pdf: badges/build_badges.py badges/badges.tex badges/badges_summer
 
 badges: badges/badges.pdf badges/badges_summer_school.pdf
 
-letters/ICCOPT2019_participation-letters.tex: xml/db.xml export_participation_letters.py
-	$(PYTHON) export_participation_letters.py
+participation-letters/participation-letters.tex: xml/db.xml participation-letters/export_participation_letters.py
+	cd participation-letters; $(PYTHON) export_participation_letters.py
 
-participation_letters/participation-letters.tex: xml/db.xml participation_letters/export_participation_letters.py
-	cd participation_letters; $(PYTHON) export_participation_letters.py
+participation-letters/summer-school_participation-letters.tex: xml/db.xml participation-letters/export_summerschool_letters.py
+	cd participation-letters; $(PYTHON) export_summerschool_letters.py
 
-participation_letters/summer-school_participation-letters.tex: xml/db.xml participation_letters/export_summerschool_letters.py
-	cd participation_letters; $(PYTHON) export_summerschool_letters.py
-
-participation_letters: participation_letters/participation-letters.tex letters/summer-school_participation-letters.tex
+participation-letters: participation-letters/participation-letters.tex participation-letters/summer-school_participation-letters.tex
 	make -C $@
 
 upload: letters csv summer_school/nametags.pdf vouchers dinner_refund.csv
@@ -64,11 +61,13 @@ parallel-sessions-overview/Parallel_sessions_overview.pdf:
 	cd parallel-sessions-overview; pdflatex Parallel_sessions_overview.tex
 	cd parallel-sessions-overview; pdflatex Parallel_sessions_overview.tex
 
-update-schedule: xml/db.xml conference-book/ICCOPT2019_Conference_Book.pdf parallel-sessions-overview/Parallel_sessions_overview.pdf xml/schedule.xml webapp
-	scp conference-book/ICCOPT2019_Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf xml/schedule.xml iccopt2019@spp1962.wias-berlin.de:/srv/www/vhosts/iccopt2019.berlin/downloads/
+update-schedule: xml/db.xml conference-book/Conference_Book.pdf parallel-sessions-overview/Parallel_sessions_overview.pdf xml/schedule.xml webapp
+	scp conference-book/Conference_Book.pdf pdf_files/ICCOPT2019_Parallel_sessions_overview.pdf xml/schedule.xml iccopt2019@spp1962.wias-berlin.de:/srv/www/vhosts/iccopt2019.berlin/downloads/
 	rsync -v -e ssh webapp/website/ iccopt2019@spp1962.wias-berlin.de:/srv/www/vhosts/iccopt2019.berlin/conference_app
 
 pwa: xml/db.xml
 	cd progressive_web_app; $(PYTHON) build_pwa.py
 
-all: app-general/schedule.xml tex csv vouchers letters summer_school/nametags.pdf conference-book/ICCOPT2019_Conference_Book.pdf parallel-sessions-overview/Parallel_sessions_overview.pdf
+all: app-general/schedule.xml tex csv vouchers letters summer_school/nametags.pdf conference-book/Conference_Book.pdf parallel-sessions-overview/Parallel_sessions_overview.pdf
+
+test: app-general/schedule.xml badges participation-letters parallel-sessions-overview/Parallel_sessions_overview.pdf vouchers xml/db.xml 
